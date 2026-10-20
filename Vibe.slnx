@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="VibeApi.Tests/VibeApi.Tests.csproj" />
+  <Project Path="VibeApi/VibeApi.csproj" />
+</Solution>
