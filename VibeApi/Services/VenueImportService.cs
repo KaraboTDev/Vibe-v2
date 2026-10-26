@@ -15,16 +15,31 @@ public sealed class VenueImportService(
         int limit)
     {
         var fetchedVenues = await venueDataProvider.FetchCafesAsync(latitude, longitude, radiusMeters, limit);
+
         var incomingVenues = fetchedVenues
+            .Select(venue => venue with
+            {
+                Latitude = Math.Round(
+                    venue.Latitude,
+                    6,
+                    MidpointRounding.AwayFromZero),
+                Longitude = Math.Round(
+                    venue.Longitude,
+                    6,
+                    MidpointRounding.AwayFromZero)
+            })
             .DistinctBy(venue => venue.ExternalRefId)
             .ToList();
+
         var externalRefIds = incomingVenues.Select(venue => venue.ExternalRefId).ToList();
+
         var existingVenues = await dbContext.Venues
             .Where(venue => externalRefIds.Contains(venue.ExternalRefId))
             .ToDictionaryAsync(venue => venue.ExternalRefId);
 
         var added = 0;
         var updated = 0;
+
         foreach (var incoming in incomingVenues)
         {
             if (!existingVenues.TryGetValue(incoming.ExternalRefId, out var existing))
@@ -38,6 +53,7 @@ public sealed class VenueImportService(
                     Latitude = incoming.Latitude,
                     Longitude = incoming.Longitude
                 });
+
                 added++;
                 continue;
             }
@@ -49,6 +65,7 @@ public sealed class VenueImportService(
         }
 
         await dbContext.SaveChangesAsync();
+
         return new ImportResult(fetchedVenues.Count, added, updated);
     }
 

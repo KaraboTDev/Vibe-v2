@@ -11,12 +11,17 @@ public class VenueImportServiceTests
     public async Task Import_Adds_New_Venues()
     {
         await using var context = CreateContext();
-        var service = CreateService(context, CreateVenue("place-1", "Cafe One"));
+
+        var service = CreateService(
+            context,
+            CreateVenue("place-1", "Cafe One"));
 
         var result = await service.ImportAsync(40.1m, -73.2m, 5000, 100);
 
         Assert.Equal(new ImportResult(1, 1, 0), result);
+
         var venue = await context.Venues.SingleAsync();
+
         Assert.Equal("place-1", venue.ExternalRefId);
         Assert.Equal("Cafe One", venue.Name);
     }
@@ -25,9 +30,13 @@ public class VenueImportServiceTests
     public async Task Import_Twice_Does_Not_Create_Duplicates()
     {
         await using var context = CreateContext();
-        var service = CreateService(context, CreateVenue("place-1", "Cafe One"));
+
+        var service = CreateService(
+            context,
+            CreateVenue("place-1", "Cafe One"));
 
         await service.ImportAsync(40.1m, -73.2m, 5000, 100);
+
         var secondResult = await service.ImportAsync(40.1m, -73.2m, 5000, 100);
 
         Assert.Equal(new ImportResult(1, 0, 0), secondResult);
@@ -38,6 +47,7 @@ public class VenueImportServiceTests
     public async Task Import_Updates_Changed_Opening_Hours()
     {
         await using var context = CreateContext();
+
         context.Venues.Add(new Venue
         {
             ExternalRefId = "place-1",
@@ -47,8 +57,12 @@ public class VenueImportServiceTests
             Address = "1 Main Street",
             OpeningHours = "Old hours"
         });
+
         await context.SaveChangesAsync();
-        var service = CreateService(context, CreateVenue("place-1", "Cafe One", "New hours"));
+
+        var service = CreateService(
+            context,
+            CreateVenue("place-1", "Cafe One", "New hours"));
 
         var result = await service.ImportAsync(40.1m, -73.2m, 5000, 100);
 
@@ -60,6 +74,7 @@ public class VenueImportServiceTests
     public async Task Import_Deduplicates_Incoming_Duplicates()
     {
         await using var context = CreateContext();
+
         var service = CreateService(
             context,
             CreateVenue("place-1", "Cafe One"),
@@ -68,8 +83,56 @@ public class VenueImportServiceTests
         var result = await service.ImportAsync(40.1m, -73.2m, 5000, 100);
 
         Assert.Equal(new ImportResult(2, 1, 0), result);
+
         var venue = await context.Venues.SingleAsync();
+
         Assert.Equal("Cafe One", venue.Name);
+    }
+
+    [Fact]
+    public async Task Import_Rounds_Coordinates_To_Six_Decimals()
+    {
+        await using var context = CreateContext();
+
+        var service = CreateService(
+            context,
+            new ExternalVenueDto(
+                "place-1",
+                "Cafe One",
+                -25.6831126m,
+                28.1951815m,
+                "1 Main Street",
+                "Monday-Friday"));
+
+        await service.ImportAsync(40.1m, -73.2m, 5000, 100);
+
+        var venue = await context.Venues.SingleAsync();
+
+        Assert.Equal(-25.683113m, venue.Latitude);
+        Assert.Equal(28.195182m, venue.Longitude);
+    }
+
+    [Fact]
+    public async Task Import_Twice_With_Seven_Decimal_Coordinates_Reports_Zero_Updated()
+    {
+        await using var context = CreateContext();
+
+        var service = CreateService(
+            context,
+            new ExternalVenueDto(
+                "place-1",
+                "Cafe One",
+                -25.6831126m,
+                28.1951815m,
+                "1 Main Street",
+                "Monday-Friday"));
+
+        await service.ImportAsync(40.1m, -73.2m, 5000, 100);
+
+        var secondResult = await service.ImportAsync(40.1m, -73.2m, 5000, 100);
+
+        Assert.Equal(0, secondResult.Added);
+        Assert.Equal(0, secondResult.Updated);
     }
 
     private static VibeDbContext CreateContext()
@@ -77,10 +140,13 @@ public class VenueImportServiceTests
         var options = new DbContextOptionsBuilder<VibeDbContext>()
             .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
+
         return new VibeDbContext(options);
     }
 
-    private static VenueImportService CreateService(VibeDbContext context, params ExternalVenueDto[] venues) =>
+    private static VenueImportService CreateService(
+        VibeDbContext context,
+        params ExternalVenueDto[] venues) =>
         new(context, new FakeVenueDataProvider(venues.ToList()));
 
     private static ExternalVenueDto CreateVenue(
@@ -89,7 +155,8 @@ public class VenueImportServiceTests
         string? openingHours = "Monday-Friday") =>
         new(externalRefId, name, 40.1m, -73.2m, "1 Main Street", openingHours);
 
-    private sealed class FakeVenueDataProvider(List<ExternalVenueDto> venues) : IVenueDataProvider
+    private sealed class FakeVenueDataProvider(List<ExternalVenueDto> venues)
+        : IVenueDataProvider
     {
         public Task<List<ExternalVenueDto>> FetchCafesAsync(
             decimal latitude,
