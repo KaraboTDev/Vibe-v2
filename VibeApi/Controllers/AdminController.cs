@@ -69,6 +69,7 @@ public sealed class AdminController(
         return MapAdminResult(await venueAdminService.SetOpeningHoursAsync(items));
     }
 
+<<<<<<< HEAD
     private IActionResult MapAdminResult(AdminResult result) => result.Status switch
     {
         AdminStatus.Success => Ok(new { updated = result.Count }),
@@ -76,6 +77,15 @@ public sealed class AdminController(
         AdminStatus.UnknownTag => BadRequest(new { message = result.Detail }),
         AdminStatus.InvalidInput => BadRequest(new { message = result.Detail }),
         _ => BadRequest(new { message = result.Detail })
+=======
+    private static IActionResult MapAdminResult(AdminResult result) => result.Status switch
+    {
+        AdminStatus.Success => new OkObjectResult(new { updated = result.Count }),
+        AdminStatus.UnknownVenue => new NotFoundObjectResult(new { message = result.Detail }),
+        AdminStatus.UnknownTag => new BadRequestObjectResult(new { message = result.Detail }),
+        AdminStatus.InvalidInput => new BadRequestObjectResult(new { message = result.Detail }),
+        _ => throw new ArgumentOutOfRangeException(nameof(result))
+>>>>>>> 66c6ac5eaaa951b55c755a19d47cf77520f7c7a5
     };
 
     private bool IsAuthorized(string? providedKey)
