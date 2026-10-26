@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using VibeApi.DTOs;
 using VibeApi.Services;
 
 namespace VibeApi.Controllers;
@@ -11,7 +12,8 @@ public sealed record ImportRequest(decimal Latitude, decimal Longitude, int Radi
 [Route("admin")]
 public sealed class AdminController(
     IConfiguration configuration,
-    IVenueImportService venueImportService) : ControllerBase
+    IVenueImportService venueImportService,
+    IVenueAdminService venueAdminService) : ControllerBase
 {
     [HttpPost("venues/import")]
     public async Task<IActionResult> ImportVenues(
@@ -40,6 +42,41 @@ public sealed class AdminController(
             request.Limit);
         return Ok(result);
     }
+
+    [HttpPut("venues/tags")]
+    public async Task<IActionResult> SetVenueTags(
+        [FromHeader(Name = "X-Admin-Key")] string? adminKey,
+        [FromBody] List<VenueTagAssignment> items)
+    {
+        if (!IsAuthorized(adminKey))
+        {
+            return Unauthorized();
+        }
+
+        return MapAdminResult(await venueAdminService.SetTagsAsync(items));
+    }
+
+    [HttpPut("venues/hours")]
+    public async Task<IActionResult> SetVenueOpeningHours(
+        [FromHeader(Name = "X-Admin-Key")] string? adminKey,
+        [FromBody] List<VenueHoursAssignment> items)
+    {
+        if (!IsAuthorized(adminKey))
+        {
+            return Unauthorized();
+        }
+
+        return MapAdminResult(await venueAdminService.SetOpeningHoursAsync(items));
+    }
+
+    private static IActionResult MapAdminResult(AdminResult result) => result.Status switch
+    {
+        AdminStatus.Success => new OkObjectResult(new { updated = result.Count }),
+        AdminStatus.UnknownVenue => new NotFoundObjectResult(new { message = result.Detail }),
+        AdminStatus.UnknownTag => new BadRequestObjectResult(new { message = result.Detail }),
+        AdminStatus.InvalidInput => new BadRequestObjectResult(new { message = result.Detail }),
+        _ => throw new ArgumentOutOfRangeException(nameof(result))
+    };
 
     private bool IsAuthorized(string? providedKey)
     {
