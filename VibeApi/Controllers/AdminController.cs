@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using VibeApi.DTOs;
 using VibeApi.Services;
 
 namespace VibeApi.Controllers;
@@ -11,7 +12,8 @@ public sealed record ImportRequest(decimal Latitude, decimal Longitude, int Radi
 [Route("admin")]
 public sealed class AdminController(
     IConfiguration configuration,
-    IVenueImportService venueImportService) : ControllerBase
+    IVenueImportService venueImportService,
+    IVenueAdminService venueAdminService) : ControllerBase
 {
     [HttpPost("venues/import")]
     public async Task<IActionResult> ImportVenues(
@@ -40,6 +42,41 @@ public sealed class AdminController(
             request.Limit);
         return Ok(result);
     }
+
+    [HttpPut("venues/tags")]
+    public async Task<IActionResult> SetVenueTags(
+        [FromHeader(Name = "X-Admin-Key")] string? adminKey,
+        [FromBody] List<VenueTagAssignment> items)
+    {
+        if (!IsAuthorized(adminKey))
+        {
+            return Unauthorized();
+        }
+
+        return MapAdminResult(await venueAdminService.SetTagsAsync(items));
+    }
+
+    [HttpPut("venues/hours")]
+    public async Task<IActionResult> SetVenueOpeningHours(
+        [FromHeader(Name = "X-Admin-Key")] string? adminKey,
+        [FromBody] List<VenueHoursAssignment> items)
+    {
+        if (!IsAuthorized(adminKey))
+        {
+            return Unauthorized();
+        }
+
+        return MapAdminResult(await venueAdminService.SetOpeningHoursAsync(items));
+    }
+
+    private IActionResult MapAdminResult(AdminResult result) => result.Status switch
+    {
+        AdminStatus.Success => Ok(new { updated = result.Count }),
+        AdminStatus.UnknownVenue => NotFound(new { message = result.Detail }),
+        AdminStatus.UnknownTag => BadRequest(new { message = result.Detail }),
+        AdminStatus.InvalidInput => BadRequest(new { message = result.Detail }),
+        _ => BadRequest(new { message = result.Detail })
+    };
 
     private bool IsAuthorized(string? providedKey)
     {
