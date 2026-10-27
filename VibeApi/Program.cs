@@ -24,6 +24,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddHttpClient<IVenueDataProvider, GeoapifyVenueProvider>();
 builder.Services.AddScoped<IVenueImportService, VenueImportService>();
 builder.Services.AddScoped<IVenueAdminService, VenueAdminService>();
+builder.Services.AddScoped<IVenueSearchService, VenueSearchService>();
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
