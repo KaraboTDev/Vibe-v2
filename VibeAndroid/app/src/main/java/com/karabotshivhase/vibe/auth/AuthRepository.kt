@@ -1,11 +1,11 @@
 package com.karabotshivhase.vibe.auth
 
+import com.google.gson.Gson
 import com.karabotshivhase.vibe.network.AuthResponse
 import com.karabotshivhase.vibe.network.ErrorBody
 import com.karabotshivhase.vibe.network.LoginRequest
 import com.karabotshivhase.vibe.network.RegisterRequest
 import com.karabotshivhase.vibe.network.VibeApi
-import com.google.gson.Gson
 import kotlinx.coroutines.CancellationException
 import retrofit2.Response
 import java.io.IOException
@@ -13,17 +13,17 @@ import java.io.IOException
 class AuthRepository(
     private val api: VibeApi,
     private val session: SessionStore,
-) {
+) : AuthActions {
     private val gson = Gson()
 
-    suspend fun login(email: String, password: String): AuthResult {
+    override suspend fun login(email: String, password: String): AuthResult {
         val processedEmail = email.trim().lowercase()
         return executeAuthCall {
             api.login(LoginRequest(email = processedEmail, password = password))
         }
     }
 
-    suspend fun register(email: String, password: String): AuthResult {
+    override suspend fun register(email: String, password: String): AuthResult {
         val processedEmail = email.trim().lowercase()
         return executeAuthCall {
             api.register(RegisterRequest(email = processedEmail, password = password))

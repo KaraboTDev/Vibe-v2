@@ -1,9 +1,22 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Vibe" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Vibe" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/vibe_green</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/vibe_orange</item>
+        <item name="android:colorBackground">@color/vibe_cream</item>
+        <item name="colorSurface">@color/vibe_cream</item>
+        <item name="colorError">@color/vibe_error</item>
+
+        <item name="textInputStyle">@style/Widget.Material3.TextInputLayout.OutlinedBox</item>
     </style>
 
-    <style name="Theme.Vibe" parent="Base.Theme.Vibe" />
+    <style name="Widget.Vibe.Button.Primary" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/vibe_green</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">24dp</item>
+        <item name="android:minHeight">52dp</item>
+    </style>
 </resources>

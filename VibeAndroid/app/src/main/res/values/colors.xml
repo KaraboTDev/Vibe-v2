@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="vibe_green">#1B4332</color>
+    <color name="vibe_orange">#E85D04</color>
+    <color name="vibe_cream">#F5F0E8</color>
+    <color name="vibe_error">#B3261E</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 </resources>
