@@ -1,4 +1,4 @@
-package com.karabotshivhase.vibe.ui
+package com.karabotshivhase.vibe
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,7 +13,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.snackbar.Snackbar
-import com.karabotshivhase.vibe.VibeApp
 import com.karabotshivhase.vibe.databinding.ActivityRegisterBinding
 import com.karabotshivhase.vibe.ui.auth.RegisterViewModel
 import com.karabotshivhase.vibe.ui.auth.UiEvent
@@ -110,6 +109,9 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun hideKeyboard() {
         val imm = getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager
-        imm?.hideSoftInputFromWindow(binding.root.windowToken, 0)
+        val token = currentFocus?.windowToken ?: binding.root.windowToken
+        if (token != null) {
+            imm?.hideSoftInputFromWindow(token, 0)
+        }
     }
 }

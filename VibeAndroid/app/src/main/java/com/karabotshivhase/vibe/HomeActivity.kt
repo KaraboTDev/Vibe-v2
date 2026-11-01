@@ -1,12 +1,10 @@
-package com.karabotshivhase.vibe.ui
+package com.karabotshivhase.vibe
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.karabotshivhase.vibe.R
-import com.karabotshivhase.vibe.VibeApp
 import com.karabotshivhase.vibe.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {

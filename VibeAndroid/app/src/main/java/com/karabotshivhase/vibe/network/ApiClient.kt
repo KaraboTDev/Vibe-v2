@@ -10,8 +10,10 @@ import java.util.concurrent.TimeUnit
 object ApiClient {
     fun createApi(
         baseUrl: String = ApiConfig.BASE_URL,
-        tokenProvider: () -> String? = { null }
+        tokenProvider: () -> String? = { null },
     ): VibeApi {
+        val formattedBaseUrl = if (baseUrl.endsWith("/")) baseUrl else "$baseUrl/"
+
         val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BASIC
             redactHeader("Authorization")
@@ -39,7 +41,7 @@ object ApiClient {
             .build()
 
         return Retrofit.Builder()
-            .baseUrl(baseUrl)
+            .baseUrl(formattedBaseUrl)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

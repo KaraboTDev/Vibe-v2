@@ -20,13 +20,29 @@ class TokenStore(context: Context) : SessionStore {
         prefs.edit { clear() }
     }
 
-    fun token(): String? = prefs.getString(KEY_TOKEN, null)
+    fun token(): String? = try {
+        prefs.getString(KEY_TOKEN, null)
+    } catch (_: Exception) {
+        null
+    }
 
-    fun email(): String? = prefs.getString(KEY_EMAIL, null)
+    fun email(): String? = try {
+        prefs.getString(KEY_EMAIL, null)
+    } catch (_: Exception) {
+        null
+    }
 
-    fun userId(): Int? = if (prefs.contains(KEY_USER_ID)) prefs.getInt(KEY_USER_ID, -1) else null
+    fun userId(): Int? = try {
+        if (prefs.contains(KEY_USER_ID)) prefs.getInt(KEY_USER_ID, -1) else null
+    } catch (_: Exception) {
+        null
+    }
 
-    fun expiresAt(): String? = prefs.getString(KEY_EXPIRES_AT, null)
+    fun expiresAt(): String? = try {
+        prefs.getString(KEY_EXPIRES_AT, null)
+    } catch (_: Exception) {
+        null
+    }
 
     fun isLoggedIn(): Boolean {
         val t = token()

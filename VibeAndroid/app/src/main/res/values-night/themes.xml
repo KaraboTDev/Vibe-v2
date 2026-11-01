@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.Vibe" parent="Theme.Material3.Light.NoActionBar">
+    <style name="Base.Theme.Vibe" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/vibe_green</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSecondary">@color/vibe_orange</item>
@@ -8,8 +8,13 @@
         <item name="colorSurface">@color/vibe_cream</item>
         <item name="colorError">@color/vibe_error</item>
 
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+
         <item name="textInputStyle">@style/Widget.Material3.TextInputLayout.OutlinedBox</item>
     </style>
+
+    <style name="Theme.Vibe" parent="Base.Theme.Vibe" />
 
     <style name="Widget.Vibe.Button.Primary" parent="Widget.Material3.Button">
         <item name="backgroundTint">@color/vibe_green</item>
