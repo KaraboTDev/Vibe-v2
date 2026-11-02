@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -34,6 +35,7 @@ class VenueDetailActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         binding = ActivityVenueDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -44,13 +46,26 @@ class VenueDetailActivity : AppCompatActivity() {
             finish()
         }
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.contentScrollView) { view, insets ->
+        binding.contentScrollView.clipToPadding = false
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.appBarLayout) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
             view.setPadding(
                 systemBars.left,
                 systemBars.top,
                 systemBars.right,
+                0,
+            )
+            insets
+        }
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.contentScrollView) { view, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
+            view.setPadding(
+                view.paddingLeft,
+                view.paddingTop,
+                view.paddingRight,
                 maxOf(systemBars.bottom, ime.bottom),
             )
             insets
