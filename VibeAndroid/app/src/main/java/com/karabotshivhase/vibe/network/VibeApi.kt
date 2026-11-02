@@ -2,7 +2,10 @@ package com.karabotshivhase.vibe.network
 
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface VibeApi {
     @POST("auth/register")
@@ -10,4 +13,21 @@ interface VibeApi {
 
     @POST("auth/login")
     suspend fun login(@Body request: LoginRequest): Response<AuthResponse>
+
+    @GET("tags")
+    suspend fun getTags(): Response<List<TagDto>>
+
+    @GET("venues")
+    suspend fun searchVenues(
+        @Query("mood") mood: String,
+        @Query("lat") lat: Double,
+        @Query("lng") lng: Double,
+        @Query("radiusKm") radiusKm: Double,
+        @Query("limit") limit: Int,
+    ): Response<List<VenueSummaryDto>>
+
+    @GET("venues/{id}")
+    suspend fun getVenue(
+        @Path("id") id: Int,
+    ): Response<VenueDetailDto>
 }

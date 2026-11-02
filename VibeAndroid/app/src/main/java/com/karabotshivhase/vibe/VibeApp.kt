@@ -6,6 +6,7 @@ import com.karabotshivhase.vibe.auth.TokenStore
 import com.karabotshivhase.vibe.network.ApiClient
 import com.karabotshivhase.vibe.network.ApiConfig
 import com.karabotshivhase.vibe.network.VibeApi
+import com.karabotshivhase.vibe.venue.VenueRepository
 
 class VibeApp : Application() {
     val tokenStore: TokenStore by lazy {
@@ -21,5 +22,9 @@ class VibeApp : Application() {
 
     val authRepository: AuthRepository by lazy {
         AuthRepository(api = api, session = tokenStore)
+    }
+
+    val venueRepository: VenueRepository by lazy {
+        VenueRepository(api = api)
     }
 }

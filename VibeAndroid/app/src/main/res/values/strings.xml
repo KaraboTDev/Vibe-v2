@@ -25,4 +25,29 @@
     <string name="error_invalid_input">Please check your details and try again</string>
     <string name="error_network">Can\'t reach the server. Check your connection and try again.</string>
     <string name="error_unknown">Something went wrong. Please try again.</string>
+
+    <!-- New Strings for Mood Picker, Results, and Detail -->
+    <string name="home_heading">How are you feeling?</string>
+    <string name="home_subtitle">Pick a mood and we\'ll find spaces that fit</string>
+    <string name="search_area_label">Search area</string>
+    <string name="find_spaces_button">Find spaces</string>
+    <string name="moods_load_error">Couldn\'t load moods. Check your connection.</string>
+    <string name="try_again">Try again</string>
+    <string name="results_title">%1$s spaces</string>
+    <string name="results_empty">No %1$s spaces found near %2$s. Try another area.</string>
+    <string name="results_error">Couldn\'t load spaces. Check your connection.</string>
+    <string name="hours_not_listed">Hours not listed</string>
+    <string name="address_not_listed">Address not listed</string>
+    <string name="opening_hours_heading">Opening hours</string>
+    <string name="mood_tags_heading">Mood tags</string>
+    <string name="open_in_maps">Open in Maps</string>
+    <string name="maps_not_available">No maps app found on this device</string>
+    <string name="venue_not_found">This space is no longer available</string>
+    <string name="venue_load_error">Couldn\'t load this space. Check your connection.</string>
+    <string name="venue_item_description">%1$s, %2$s away, %3$s</string>
+    <string name="mood_quiet">Quiet</string>
+    <string name="mood_social">Social</string>
+    <string name="mood_focus">Focus</string>
+    <string name="mood_creative">Creative</string>
+    <string name="mood_cheap_wifi">Cheap Wifi</string>
 </resources>
