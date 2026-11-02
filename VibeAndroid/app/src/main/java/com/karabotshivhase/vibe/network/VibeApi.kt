@@ -2,6 +2,7 @@ package com.karabotshivhase.vibe.network
 
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.POST
@@ -30,4 +31,17 @@ interface VibeApi {
     suspend fun getVenue(
         @Path("id") id: Int,
     ): Response<VenueDetailDto>
+
+    @GET("favorites")
+    suspend fun getFavorites(): Response<List<FavoriteDto>>
+
+    @POST("favorites")
+    suspend fun addFavorite(
+        @Body body: Map<String, Int>,
+    ): Response<FavoriteDto>
+
+    @DELETE("favorites/{venueId}")
+    suspend fun removeFavorite(
+        @Path("venueId") venueId: Int,
+    ): Response<Unit>
 }
