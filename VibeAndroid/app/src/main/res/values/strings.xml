@@ -26,7 +26,7 @@
     <string name="error_network">Can\'t reach the server. Check your connection and try again.</string>
     <string name="error_unknown">Something went wrong. Please try again.</string>
 
-    <!-- New Strings for Mood Picker, Results, and Detail -->
+    <!-- Mood Picker, Results, and Detail Strings -->
     <string name="home_heading">How are you feeling?</string>
     <string name="home_subtitle">Pick a mood and we\'ll find spaces that fit</string>
     <string name="search_area_label">Search area</string>
@@ -50,4 +50,23 @@
     <string name="mood_focus">Focus</string>
     <string name="mood_creative">Creative</string>
     <string name="mood_cheap_wifi">Cheap Wifi</string>
+
+    <!-- Saved Spaces Strings -->
+    <string name="nav_saved_spaces">Saved spaces</string>
+    <string name="saved_title">Saved spaces</string>
+    <string name="saved_subtitle">Available offline</string>
+    <string name="saved_empty_title">Nothing saved yet</string>
+    <string name="saved_empty_hint">Save a space from its details and it will appear here, even without a connection.</string>
+    <string name="save_button">Save space</string>
+    <string name="saved_button">Saved</string>
+    <string name="saved_message">Saved to your list</string>
+    <string name="removed_message">Removed from saved</string>
+    <string name="pending_sync_chip">Waiting to sync</string>
+    <string name="remove_saved_description">Remove %1$s from saved</string>
+    <string name="offline_copy_notice">You\'re offline. Showing your saved copy.</string>
+
+    <plurals name="pending_changes">
+        <item quantity="one">%d change waiting to sync</item>
+        <item quantity="other">%d changes waiting to sync</item>
+    </plurals>
 </resources>

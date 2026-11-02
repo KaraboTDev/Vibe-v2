@@ -9,26 +9,26 @@ class FavoriteRepository(
     private val userIdProvider: () -> Int?,
     private val scheduler: SyncScheduler,
     private val clock: () -> Long = System::currentTimeMillis,
-) {
+) : SavedSpaces {
 
-    fun observeSaved(): Flow<List<SavedSpace>> {
+    override fun observeSaved(): Flow<List<SavedSpace>> {
         val userId = userIdProvider() ?: return kotlinx.coroutines.flow.flowOf(emptyList())
         return local.observeVisible(userId).map { entities ->
             entities.map { it.toSavedSpace() }
         }
     }
 
-    fun observeIsSaved(venueId: Int): Flow<Boolean> {
+    override fun observeIsSaved(venueId: Int): Flow<Boolean> {
         val userId = userIdProvider() ?: return kotlinx.coroutines.flow.flowOf(false)
         return local.observeIsSaved(userId, venueId)
     }
 
-    fun observePendingCount(): Flow<Int> {
+    override fun observePendingCount(): Flow<Int> {
         val userId = userIdProvider() ?: return kotlinx.coroutines.flow.flowOf(0)
         return local.observePendingCount(userId)
     }
 
-    suspend fun save(detail: VenueDetail) {
+    override suspend fun save(detail: VenueDetail) {
         val userId = userIdProvider() ?: return
         val existing = local.get(userId, detail.id)
         val tagNames = detail.tags.map { it.name }
@@ -66,7 +66,7 @@ class FavoriteRepository(
         }
     }
 
-    suspend fun remove(venueId: Int) {
+    override suspend fun remove(venueId: Int) {
         val userId = userIdProvider() ?: return
         val existing = local.get(userId, venueId) ?: return
 
@@ -83,5 +83,12 @@ class FavoriteRepository(
                 // do nothing
             }
         }
+    }
+
+    override suspend fun getSaved(venueId: Int): SavedSpace? {
+        val userId = userIdProvider() ?: return null
+        val entity = local.get(userId, venueId) ?: return null
+        if (entity.syncState == SyncState.PENDING_REMOVE) return null
+        return entity.toSavedSpace()
     }
 }

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,6 +16,7 @@ import com.google.android.material.chip.Chip
 import com.karabotshivhase.vibe.databinding.ActivityHomeBinding
 import com.karabotshivhase.vibe.ui.Extras
 import com.karabotshivhase.vibe.ui.ResultsActivity
+import com.karabotshivhase.vibe.ui.SavedActivity
 import com.karabotshivhase.vibe.ui.home.HomeViewModel
 import com.karabotshivhase.vibe.ui.home.TagsUiState
 import com.karabotshivhase.vibe.util.AreaPresets
@@ -30,6 +32,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
         val app = application as VibeApp
@@ -41,13 +44,35 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.rootScrollView) { view, insets ->
+        binding.toolbar.setOnMenuItemClickListener { menuItem ->
+            if (menuItem.itemId == R.id.action_saved_spaces) {
+                startActivity(Intent(this, SavedActivity::class.java))
+                true
+            } else {
+                false
+            }
+        }
+
+        binding.rootScrollView.clipToPadding = false
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.appBarLayout) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
             view.setPadding(
                 systemBars.left,
                 systemBars.top,
                 systemBars.right,
+                0,
+            )
+            insets
+        }
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.rootScrollView) { view, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
+            view.setPadding(
+                view.paddingLeft,
+                view.paddingTop,
+                view.paddingRight,
                 maxOf(systemBars.bottom, ime.bottom),
             )
             insets

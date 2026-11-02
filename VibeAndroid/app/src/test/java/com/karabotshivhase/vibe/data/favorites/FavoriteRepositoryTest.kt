@@ -179,4 +179,31 @@ class FavoriteRepositoryTest {
         val pendingCount = repository.observePendingCount().first()
         assertEquals(0, pendingCount)
     }
+
+    @Test
+    fun getSaved_returns_mapped_space() = runTest {
+        repository.save(sampleDetail)
+
+        val savedSpace = repository.getSaved(10)
+        assertNotNull(savedSpace)
+        assertEquals(10, savedSpace!!.venueId)
+        assertEquals("Coffee Shop", savedSpace.name)
+        assertEquals(listOf("Quiet"), savedSpace.tags)
+    }
+
+    @Test
+    fun getSaved_hides_pending_remove_and_returns_null_when_logged_out() = runTest {
+        fakeLocal.upsert(
+            FavoriteEntity(42, 20, "Removing", 0.0, 0.0, null, null, "", 200L, SyncState.PENDING_REMOVE)
+        )
+
+        val spaceWhenRemoving = repository.getSaved(20)
+        assertNull(spaceWhenRemoving)
+
+        repository.save(sampleDetail)
+        currentUserId = null
+
+        val spaceWhenLoggedOut = repository.getSaved(10)
+        assertNull(spaceWhenLoggedOut)
+    }
 }

@@ -1,130 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/rootScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/vibe_cream"
-    android:fillViewport="true">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:background="@color/vibe_cream"
+        app:elevation="0dp">
 
-        <TextView
-            android:id="@+id/titleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/home_heading"
-            android:textColor="@color/vibe_green"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/subtitleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/home_subtitle"
-            android:textColor="@color/vibe_green"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/mood_tags_heading"
-            android:textColor="@color/vibe_green"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <FrameLayout
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp">
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/menu_home"
+            app:title="@string/app_name"
+            app:titleTextColor="@color/vibe_green" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroupMoods"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:selectionRequired="false"
-                app:singleSelection="true" />
-
-            <ProgressBar
-                android:id="@+id/tagsProgressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:indeterminateTint="@color/vibe_orange"
-                android:visibility="gone" />
-        </FrameLayout>
+    <ScrollView
+        android:id="@+id/rootScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fillViewport="true">
 
         <LinearLayout
-            android:id="@+id/tagsErrorLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_heading"
+                android:textColor="@color/vibe_green"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/subtitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/home_subtitle"
+                android:textColor="@color/vibe_green"
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/moods_load_error"
-                android:textColor="@color/vibe_green" />
+                android:layout_marginTop="24dp"
+                android:text="@string/mood_tags_heading"
+                android:textColor="@color/vibe_green"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/tagsRetryButton"
-                style="@style/Widget.Vibe.Button.Primary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/try_again" />
-        </LinearLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:hint="@string/search_area_label">
-
-            <AutoCompleteTextView
-                android:id="@+id/autoCompleteArea"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/search_area_label"
-                android:inputType="none" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginTop="8dp">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/findSpacesButton"
-            style="@style/Widget.Vibe.Button.Primary"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:enabled="false"
-            android:text="@string/find_spaces_button" />
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupMoods"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:selectionRequired="false"
+                    app:singleSelection="true" />
 
-        <TextView
-            android:id="@+id/signedInAsTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:textColor="@color/vibe_green"
-            android:textSize="14sp" />
+                <ProgressBar
+                    android:id="@+id/tagsProgressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:indeterminateTint="@color/vibe_orange"
+                    android:visibility="gone" />
+            </FrameLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/logoutButton"
-            style="@style/Widget.Material3.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/logout_button"
-            app:strokeColor="@color/vibe_green" />
+            <LinearLayout
+                android:id="@+id/tagsErrorLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
 
-    </LinearLayout>
-</ScrollView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/moods_load_error"
+                    android:textColor="@color/vibe_green" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/tagsRetryButton"
+                    style="@style/Widget.Vibe.Button.Primary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/try_again" />
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:hint="@string/search_area_label">
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/search_area_label"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/findSpacesButton"
+                style="@style/Widget.Vibe.Button.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:enabled="false"
+                android:text="@string/find_spaces_button" />
+
+            <TextView
+                android:id="@+id/signedInAsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/vibe_green"
+                android:textSize="14sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/logoutButton"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/logout_button"
+                app:strokeColor="@color/vibe_green" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
