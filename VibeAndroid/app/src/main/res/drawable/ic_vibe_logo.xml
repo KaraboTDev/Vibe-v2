@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="240dp"
+    android:viewportWidth="200"
+    android:viewportHeight="240">
+
+    <!-- Orange Map Pin Outer Body -->
+    <path
+        android:fillColor="#E85D04"
+        android:pathData="M100,20 C69.1,20 44,45.1 44,76 C44,93.1 52.6,108.3 66,117.6 L100,166 L134,117.6 C147.4,108.3 156,93.1 156,76 C156,45.1 130.9,20 100,20 Z M100,140 L76,106 C66.5,98 61,87.3 61,76 C61,54.5 78.5,37 100,37 C121.5,37 139,54.5 139,76 C139,87.3 133.5,98 124,106 L100,140 Z" />
+
+    <!-- Dark Green Sound Waves / Fingerprint Arcs Inside Pin -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M44,72 L61,72 C71,72 76,52 100,52 C124,52 129,72 139,72 L156,72"
+        android:strokeColor="#1B4332"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="6" />
+
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M47,84 L63,84 C73,84 78,64 100,64 C122,64 127,84 137,84 L153,84"
+        android:strokeColor="#1B4332"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="6" />
+
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M70,98 C80,98 85,78 100,78 C115,78 120,98 130,98"
+        android:strokeColor="#1B4332"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="6" />
+
+    <!-- "Vibe" Wordmark in Dark Green (#1B4332) -->
+    <!-- 'V' -->
+    <path
+        android:fillColor="#1B4332"
+        android:pathData="M42,185 L53,218 L64,185 L73,185 L58,225 L48,225 L33,185 Z" />
+    <!-- 'i' -->
+    <path
+        android:fillColor="#1B4332"
+        android:pathData="M78,181 C81,181 83,179 83,176 C83,173 81,171 78,171 C75,171 73,173 73,176 C73,179 75,181 78,181 Z M74,192 L82,192 L82,225 L74,225 Z" />
+    <!-- 'b' -->
+    <path
+        android:fillColor="#1B4332"
+        android:pathData="M90,170 L98,170 L98,194 C101,190 106,188 111,188 C122,188 129,196 129,207 C129,218 121,226 111,226 C106,226 101,224 98,220 L98,225 L90,225 Z M109,195 C103,195 98,200 98,207 C98,214 103,219 109,219 C115,219 120,214 120,207 C120,200 115,195 109,195 Z" />
+    <!-- 'e' -->
+    <path
+        android:fillColor="#1B4332"
+        android:pathData="M148,207 C148,208 147,209 146,209 L137,209 C138,215 142,219 148,219 C152,219 156,217 158,214 L165,218 C161,223 155,226 148,226 C136,226 128,218 128,207 C128,196 136,188 147,188 C158,188 165,196 165,207 L165,207 Z M147,195 C141,195 137,199 137,203 L157,203 C156,199 152,195 147,195 Z" />
+
+</vector>
