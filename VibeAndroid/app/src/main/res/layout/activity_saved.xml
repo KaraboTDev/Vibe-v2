@@ -17,7 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:logo="@drawable/ic_vibe_logo_small"
+            app:logo="@mipmap/ic_launcher_foreground"
             app:subtitle="@string/saved_subtitle"
             app:subtitleTextColor="@color/vibe_green"
             app:title="@string/saved_title"
