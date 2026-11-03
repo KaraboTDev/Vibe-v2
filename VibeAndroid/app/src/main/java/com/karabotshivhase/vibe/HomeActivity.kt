@@ -74,7 +74,7 @@ class HomeActivity : AppCompatActivity() {
         binding.cardOutdoorEscape.setOnClickListener { openResults("Creative") }
         binding.cardHiddenGems.setOnClickListener { openResults("Focus") }
 
-        binding.profileAvatarImageView.setOnClickListener {
+        binding.settingsButton.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
 
@@ -100,16 +100,6 @@ class HomeActivity : AppCompatActivity() {
                     AppLocale.apply(refreshResult.settings.language)
                 }
                 else -> {}
-            }
-        }
-
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                launch {
-                    viewModel.selectedArea.collect { selectedArea ->
-                        // Area maintained for search
-                    }
-                }
             }
         }
     }
