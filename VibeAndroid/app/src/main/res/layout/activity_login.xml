@@ -10,41 +10,101 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:padding="20dp">
 
-        <ImageView
-            android:id="@+id/logoImageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginBottom="16dp"
-            android:contentDescription="@string/app_name"
-            android:src="@mipmap/ic_launcher_foreground" />
+        <!-- Hero Photo Card with Rounded Corners -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="340dp"
+            android:layout_marginTop="8dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="2dp"
+            app:strokeWidth="0dp">
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- Hero Photo (User's welcome_hero.jpg) -->
+                <ImageView
+                    android:id="@+id/heroImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/welcome_hero" />
+
+                <!-- Bottom Pills Overlay (Focus and Quiet, No Emojis) -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|start"
+                    android:layout_margin="16dp"
+                    android:orientation="horizontal">
+
+                    <!-- Focus Pill -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_chip_orange"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="8dp"
+                        android:text="@string/mood_focus"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <!-- Quiet Pill -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/bg_chip_light"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="8dp"
+                        android:text="@string/mood_quiet"
+                        android:textColor="@color/vibe_green"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Heading Text -->
         <TextView
             android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login_title"
+            android:layout_marginTop="24dp"
+            android:text="@string/welcome_heading"
             android:textColor="@color/vibe_green"
             android:textSize="28sp"
             android:textStyle="bold" />
 
+        <!-- Subtitle Text -->
         <TextView
             android:id="@+id/subtitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/login_subtitle"
+            android:paddingHorizontal="16dp"
+            android:text="@string/welcome_subtitle"
+            android:textAlignment="center"
             android:textColor="@color/vibe_green"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
+        <!-- Login Form Inputs -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:hint="@string/email_label"
             app:errorEnabled="true">
 
@@ -62,7 +122,7 @@
             android:id="@+id/passwordInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:hint="@string/password_label"
             app:endIconMode="password_toggle"
             app:errorEnabled="true">
@@ -81,7 +141,7 @@
             android:id="@+id/progressIndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:indeterminate="true"
             android:visibility="gone"
             app:indicatorColor="@color/vibe_orange" />
@@ -91,14 +151,17 @@
             style="@style/Widget.Vibe.Button.Primary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/login_button" />
+            android:layout_marginTop="16dp"
+            android:text="@string/login_button"
+            app:icon="@drawable/ic_arrow_right"
+            app:iconGravity="end" />
 
         <TextView
             android:id="@+id/goToRegisterTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:padding="8dp"
             android:text="@string/go_to_register"
             android:textColor="@color/vibe_orange"

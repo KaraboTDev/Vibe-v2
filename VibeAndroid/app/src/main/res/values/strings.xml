@@ -26,6 +26,10 @@
     <string name="error_network">Can\'t reach the server. Check your connection and try again.</string>
     <string name="error_unknown">Something went wrong. Please try again.</string>
 
+    <!-- Welcome Screen Strings -->
+    <string name="welcome_heading">Find your rhythm.</string>
+    <string name="welcome_subtitle">Discover the perfect space for how you feel right now.</string>
+
     <!-- Mood Picker, Results, and Detail Strings -->
     <string name="home_heading">How are you feeling?</string>
     <string name="home_subtitle">Pick a mood and we\'ll find spaces that fit</string>
