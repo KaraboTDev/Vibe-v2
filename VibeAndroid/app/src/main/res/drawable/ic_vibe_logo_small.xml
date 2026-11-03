@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="36dp"
+    android:height="36dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Orange Map Pin Outer Body -->
+    <path
+        android:fillColor="#E85D04"
+        android:pathData="M54,18 C39.1,18 27,30.1 27,45 C27,53.2 31.1,60.5 37.5,65 L54,88 L70.5,65 C76.9,60.5 81,53.2 81,45 C81,30.1 68.9,18 54,18 Z M54,76 L42.5,60.5 C37.9,56.6 35,51 35,45 C35,34.5 43.5,26 54,26 C64.5,26 73,34.5 73,45 C73,51 70.1,56.6 65.5,60.5 L54,76 Z" />
+
+    <!-- Dark Green Sound Waves / Fingerprint Arcs Inside Pin -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M27,43 L35,43 C39,43 41,33 54,33 C67,33 69,43 73,43 L81,43"
+        android:strokeColor="#1B4332"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="3" />
+
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M28,49 L36,49 C40,49 42,39 54,39 C66,39 68,49 72,49 L80,49"
+        android:strokeColor="#1B4332"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="3" />
+
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M39,56 C44,56 46,46 54,46 C62,46 64,56 69,56"
+        android:strokeColor="#1B4332"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="3" />
+
+</vector>
