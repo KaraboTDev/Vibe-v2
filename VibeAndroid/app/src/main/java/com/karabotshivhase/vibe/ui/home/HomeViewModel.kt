@@ -22,7 +22,10 @@ sealed interface TagsUiState {
 
 class HomeViewModel(
     private val venueSource: VenueSource,
+    val initialArea: Area = AreaPresets.default,
 ) : ViewModel() {
+
+    private var lastDefaultAreaName = initialArea.name
 
     private val _tagsState = MutableStateFlow<TagsUiState>(TagsUiState.Loading)
     val tagsState: StateFlow<TagsUiState> = _tagsState.asStateFlow()
@@ -30,7 +33,7 @@ class HomeViewModel(
     private val _selectedMood = MutableStateFlow<String?>(null)
     val selectedMood: StateFlow<String?> = _selectedMood.asStateFlow()
 
-    private val _selectedArea = MutableStateFlow<Area>(AreaPresets.default)
+    private val _selectedArea = MutableStateFlow<Area>(initialArea)
     val selectedArea: StateFlow<Area> = _selectedArea.asStateFlow()
 
     private val _canSearch = MutableStateFlow(false)
@@ -67,11 +70,21 @@ class HomeViewModel(
         _selectedArea.update { area }
     }
 
+    fun onDefaultAreaChanged(area: Area) {
+        if (area.name != lastDefaultAreaName) {
+            lastDefaultAreaName = area.name
+            _selectedArea.update { area }
+        }
+    }
+
     companion object {
-        fun Factory(venueSource: VenueSource) = object : ViewModelProvider.Factory {
+        fun Factory(
+            venueSource: VenueSource,
+            initialArea: Area = AreaPresets.default,
+        ) = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return HomeViewModel(venueSource) as T
+                return HomeViewModel(venueSource, initialArea) as T
             }
         }
     }

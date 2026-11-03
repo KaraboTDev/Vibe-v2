@@ -13,6 +13,11 @@ import com.karabotshivhase.vibe.data.favorites.RoomFavoriteLocalStore
 import com.karabotshivhase.vibe.data.favorites.SyncScheduler
 import com.karabotshivhase.vibe.data.favorites.VibeDatabase
 import com.karabotshivhase.vibe.data.favorites.WorkManagerSyncScheduler
+import com.karabotshivhase.vibe.data.settings.ApiSettingsRemote
+import com.karabotshivhase.vibe.data.settings.SettingsRemote
+import com.karabotshivhase.vibe.data.settings.SettingsRepository
+import com.karabotshivhase.vibe.data.settings.SettingsStore
+import com.karabotshivhase.vibe.data.settings.SharedPreferencesSettingsStore
 import com.karabotshivhase.vibe.network.ApiClient
 import com.karabotshivhase.vibe.network.ApiConfig
 import com.karabotshivhase.vibe.network.VibeApi
@@ -70,6 +75,22 @@ class VibeApp : Application() {
         FavoriteSyncer(
             local = localStore,
             remote = remote,
+            userIdProvider = { tokenStore.userId() },
+        )
+    }
+
+    val settingsStore: SettingsStore by lazy {
+        SharedPreferencesSettingsStore(this)
+    }
+
+    val settingsRemote: SettingsRemote by lazy {
+        ApiSettingsRemote(api)
+    }
+
+    val settingsRepository: SettingsRepository by lazy {
+        SettingsRepository(
+            store = settingsStore,
+            remote = settingsRemote,
             userIdProvider = { tokenStore.userId() },
         )
     }

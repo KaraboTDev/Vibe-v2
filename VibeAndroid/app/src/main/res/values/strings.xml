@@ -69,4 +69,24 @@
         <item quantity="one">%d change waiting to sync</item>
         <item quantity="other">%d changes waiting to sync</item>
     </plurals>
+
+    <!-- Settings Strings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_default_area">Default search area</string>
+    <string name="settings_notifications">Notifications</string>
+    <string name="settings_notifications_summary">Get updates about new spaces near you</string>
+    <string name="settings_account">Account</string>
+    <string name="settings_saved">Settings saved</string>
+    <string name="settings_saved_offline">Saved on this device. We\'ll sync when you\'re online.</string>
+    <string name="settings_invalid">That option isn\'t supported.</string>
+    <string name="session_expired">Your session has expired. Please log in again.</string>
+    <string name="login_action">Log in</string>
+    <string name="logout_confirm_title">Log out of Vibe?</string>
+    <string name="logout_confirm_message">You can log back in at any time.</string>
+    <string name="cancel">Cancel</string>
+    <string name="nav_settings">Settings</string>
+    <string name="language_english" translatable="false">English</string>
+    <string name="language_zulu" translatable="false">isiZulu</string>
+    <string name="language_afrikaans" translatable="false">Afrikaans</string>
 </resources>

@@ -6,6 +6,7 @@ import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Query
 
 interface VibeApi {
@@ -44,4 +45,12 @@ interface VibeApi {
     suspend fun removeFavorite(
         @Path("venueId") venueId: Int,
     ): Response<Unit>
+
+    @GET("settings")
+    suspend fun getSettings(): Response<SettingsDto>
+
+    @PUT("settings")
+    suspend fun updateSettings(
+        @Body body: SettingsDto,
+    ): Response<SettingsDto>
 }

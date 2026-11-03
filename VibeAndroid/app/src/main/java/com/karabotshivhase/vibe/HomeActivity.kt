@@ -13,12 +13,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.chip.Chip
+import com.karabotshivhase.vibe.data.settings.RefreshResult
 import com.karabotshivhase.vibe.databinding.ActivityHomeBinding
 import com.karabotshivhase.vibe.ui.Extras
 import com.karabotshivhase.vibe.ui.ResultsActivity
 import com.karabotshivhase.vibe.ui.SavedActivity
+import com.karabotshivhase.vibe.ui.SettingsActivity
 import com.karabotshivhase.vibe.ui.home.HomeViewModel
 import com.karabotshivhase.vibe.ui.home.TagsUiState
+import com.karabotshivhase.vibe.util.AppLocale
 import com.karabotshivhase.vibe.util.AreaPresets
 import com.karabotshivhase.vibe.util.moodLabelRes
 import kotlinx.coroutines.launch
@@ -28,7 +31,9 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
 
     private val viewModel: HomeViewModel by viewModels {
-        HomeViewModel.Factory((application as VibeApp).venueRepository)
+        val app = application as VibeApp
+        val defaultArea = AreaPresets.byName(app.settingsRepository.current().defaultAreaName)
+        HomeViewModel.Factory(app.venueRepository, defaultArea)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,11 +50,16 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.toolbar.setOnMenuItemClickListener { menuItem ->
-            if (menuItem.itemId == R.id.action_saved_spaces) {
-                startActivity(Intent(this, SavedActivity::class.java))
-                true
-            } else {
-                false
+            when (menuItem.itemId) {
+                R.id.action_saved_spaces -> {
+                    startActivity(Intent(this, SavedActivity::class.java))
+                    true
+                }
+                R.id.action_settings -> {
+                    startActivity(Intent(this, SettingsActivity::class.java))
+                    true
+                }
+                else -> false
             }
         }
 
@@ -78,19 +88,11 @@ class HomeActivity : AppCompatActivity() {
             insets
         }
 
-        val userEmail = app.tokenStore.email().orEmpty()
-        binding.signedInAsTextView.text = getString(R.string.home_signed_in_as, userEmail)
-
-        binding.logoutButton.setOnClickListener {
-            app.tokenStore.clear()
-            openLogin()
-        }
-
         // Setup Area Dropdown
         val areaNames = AreaPresets.all.map { it.name }
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, areaNames)
         binding.autoCompleteArea.setAdapter(adapter)
-        binding.autoCompleteArea.setText(AreaPresets.default.name, false)
+        binding.autoCompleteArea.setText(viewModel.selectedArea.value.name, false)
         binding.autoCompleteArea.setOnItemClickListener { _, _, position, _ ->
             val selected = AreaPresets.all[position]
             viewModel.selectArea(selected)
@@ -126,6 +128,15 @@ class HomeActivity : AppCompatActivity() {
         }
 
         lifecycleScope.launch {
+            when (val refreshResult = app.settingsRepository.refresh()) {
+                is RefreshResult.Updated -> {
+                    AppLocale.apply(refreshResult.settings.language)
+                }
+                else -> {}
+            }
+        }
+
+        lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     viewModel.tagsState.collect { state ->
@@ -150,12 +161,24 @@ class HomeActivity : AppCompatActivity() {
                     }
                 }
                 launch {
+                    viewModel.selectedArea.collect { selectedArea ->
+                        binding.autoCompleteArea.setText(selectedArea.name, false)
+                    }
+                }
+                launch {
                     viewModel.canSearch.collect { canSearch ->
                         binding.findSpacesButton.isEnabled = canSearch
                     }
                 }
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val app = application as VibeApp
+        val defaultArea = AreaPresets.byName(app.settingsRepository.current().defaultAreaName)
+        viewModel.onDefaultAreaChanged(defaultArea)
     }
 
     private fun populateMoodChips(tags: List<com.karabotshivhase.vibe.venue.Tag>) {
