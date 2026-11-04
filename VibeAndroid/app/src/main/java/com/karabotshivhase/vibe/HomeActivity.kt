@@ -7,9 +7,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.Lifecycle
 import com.karabotshivhase.vibe.data.settings.RefreshResult
 import com.karabotshivhase.vibe.databinding.ActivityHomeBinding
 import com.karabotshivhase.vibe.ui.Extras
@@ -71,7 +71,7 @@ class HomeActivity : AppCompatActivity() {
         binding.cardQuietFocus.setOnClickListener { openResults("Quiet") }
         binding.cardSocialLively.setOnClickListener { openResults("Social") }
         binding.cardFastWifi.setOnClickListener { openResults("Cheap Wifi") }
-        binding.cardOutdoorEscape.setOnClickListener { openResults("Creative") }
+        binding.cardCreative.setOnClickListener { openResults("Creative") }
         binding.cardHiddenGems.setOnClickListener { openResults("Focus") }
 
         binding.settingsButton.setOnClickListener {

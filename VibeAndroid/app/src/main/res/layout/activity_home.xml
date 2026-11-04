@@ -10,17 +10,19 @@
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
         android:background="@color/vibe_cream"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingHorizontal="20dp">
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="8dp">
 
         <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_vibe_logo_small" />
+            android:src="@mipmap/ic_launcher_foreground" />
 
         <TextView
             android:layout_width="0dp"
@@ -234,16 +236,16 @@
                 </RelativeLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Row 3: Outdoor Escape & Hidden Gems -->
+            <!-- Row 3: Creative & Hidden Gems -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:orientation="horizontal">
 
-                <!-- Outdoor Escape Card -->
+                <!-- Creative Card -->
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardOutdoorEscape"
+                    android:id="@+id/cardCreative"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
@@ -262,8 +264,8 @@
                         <ImageView
                             android:layout_width="32dp"
                             android:layout_height="32dp"
-                            android:contentDescription="Outdoor"
-                            android:src="@drawable/ic_mood_tree" />
+                            android:contentDescription="@string/mood_creative"
+                            android:src="@drawable/ic_mood_palette" />
 
                         <View
                             android:layout_width="match_parent"
@@ -273,16 +275,16 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Outdoor Escape"
+                            android:text="Creative"
                             android:textColor="@color/vibe_green"
-                            android:textSize="17sp"
+                            android:textSize="18sp"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="Fresh air"
+                            android:text="Inspiring spaces"
                             android:textColor="@color/vibe_green"
                             android:textSize="13sp" />
                     </LinearLayout>
