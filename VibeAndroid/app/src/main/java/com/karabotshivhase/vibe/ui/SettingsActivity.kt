@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import com.karabotshivhase.vibe.HomeActivity
 import com.karabotshivhase.vibe.LoginActivity
 import com.karabotshivhase.vibe.R
 import com.karabotshivhase.vibe.VibeApp
@@ -42,15 +43,13 @@ class SettingsActivity : AppCompatActivity() {
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.toolbar.setNavigationOnClickListener {
+        binding.backButton.setOnClickListener {
             finish()
         }
 
         binding.rootScrollView.clipToPadding = false
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.appBarLayout) { view, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.headerLayout) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             view.setPadding(
                 systemBars.left,
@@ -61,14 +60,13 @@ class SettingsActivity : AppCompatActivity() {
             insets
         }
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.rootScrollView) { view, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.bottomNavigationView) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
             view.setPadding(
                 view.paddingLeft,
                 view.paddingTop,
                 view.paddingRight,
-                maxOf(systemBars.bottom, ime.bottom),
+                systemBars.bottom,
             )
             insets
         }
@@ -106,6 +104,26 @@ class SettingsActivity : AppCompatActivity() {
             showLogoutDialog()
         }
 
+        binding.bottomNavigationView.selectedItemId = R.id.nav_profile
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_discover -> {
+                    val intent = Intent(this, HomeActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    }
+                    startActivity(intent)
+                    finish()
+                    true
+                }
+                R.id.nav_saved -> {
+                    startActivity(Intent(this, SavedActivity::class.java))
+                    false
+                }
+                R.id.nav_profile -> true
+                else -> false
+            }
+        }
+
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
@@ -124,7 +142,10 @@ class SettingsActivity : AppCompatActivity() {
 
                         binding.switchNotifications.isChecked = state.notificationsEnabled
 
-                        binding.emailTextView.text = getString(R.string.home_signed_in_as, state.email.orEmpty())
+                        val userEmail = state.email.orEmpty()
+                        val displayName = userEmail.substringBefore("@").ifBlank { "User" }
+                        binding.profileNameTextView.text = displayName
+                        binding.emailTextView.text = getString(R.string.home_signed_in_as, userEmail)
 
                         state.messageRes?.let { msgRes ->
                             Snackbar.make(binding.root, msgRes, Snackbar.LENGTH_LONG).show()
@@ -158,6 +179,11 @@ class SettingsActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.bottomNavigationView.selectedItemId = R.id.nav_profile
     }
 
     private fun showLogoutDialog() {
