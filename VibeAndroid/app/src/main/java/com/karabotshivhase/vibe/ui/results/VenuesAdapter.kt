@@ -10,7 +10,7 @@ import com.karabotshivhase.vibe.R
 import com.karabotshivhase.vibe.databinding.ItemVenueBinding
 import com.karabotshivhase.vibe.venue.Venue
 import com.karabotshivhase.vibe.util.DistanceFormatter
-import com.karabotshivhase.vibe.util.HoursFormatter
+import com.karabotshivhase.vibe.util.moodLabelRes
 
 class VenuesAdapter(
     private val onVenueClick: (Venue) -> Unit,
@@ -31,23 +31,24 @@ class VenuesAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(venue: Venue) {
+            val context = binding.root.context
             binding.nameTextView.text = venue.name
             val distanceStr = DistanceFormatter.format(venue.distanceMeters)
-            binding.distanceTextView.text = distanceStr
+            binding.distanceTextView.text = "$distanceStr away"
 
             val tagsStr = if (venue.tags.isNotEmpty()) {
-                venue.tags.joinToString(" · ")
+                venue.tags.joinToString(" · ") { tag ->
+                    moodLabelRes(tag)?.let { context.getString(it) } ?: tag
+                }
             } else {
                 ""
             }
             binding.tagsTextView.text = tagsStr
             binding.tagsTextView.visibility = if (tagsStr.isEmpty()) View.GONE else View.VISIBLE
 
-            val hoursClean = HoursFormatter.clean(venue.openingHours)
-            val hoursStr = hoursClean ?: binding.root.context.getString(R.string.hours_not_listed)
-            binding.hoursTextView.text = hoursStr
+            binding.ratingTextView.text = "4.8"
 
-            val combinedDesc = binding.root.context.getString(
+            val combinedDesc = context.getString(
                 R.string.venue_item_description,
                 venue.name,
                 distanceStr,
