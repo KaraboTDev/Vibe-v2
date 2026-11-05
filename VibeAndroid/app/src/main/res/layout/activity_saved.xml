@@ -24,7 +24,8 @@
             android:layout_height="40dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_vibe_logo_small" />
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@color/vibe_green" />
 
         <ImageView
             android:layout_width="32dp"
@@ -81,7 +82,7 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:contentDescription="Search"
+                    android:contentDescription="@string/search_description"
                     android:src="@drawable/ic_search" />
 
                 <EditText
@@ -89,8 +90,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
+                    android:autofillHints="name"
                     android:background="@null"
-                    android:hint="Search saved spaces..."
+                    android:hint="@string/search_saved_spaces_hint"
                     android:inputType="text"
                     android:maxLines="1"
                     android:textColor="@color/vibe_green"
@@ -123,7 +125,7 @@
                     android:focusable="true"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
-                    android:text="All Saved"
+                    android:text="@string/pill_all_saved"
                     android:textColor="@color/white"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -219,7 +221,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:text="Saved spaces"
+                android:text="@string/saved_title"
                 android:textColor="@color/vibe_green"
                 android:textSize="22sp"
                 android:textStyle="bold" />
@@ -230,7 +232,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:text="0 places"
                 android:textColor="@color/vibe_orange"
                 android:textSize="14sp"
                 android:textStyle="bold" />

@@ -24,7 +24,8 @@
             android:layout_height="40dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_vibe_logo_small" />
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@color/vibe_green" />
 
         <ImageView
             android:layout_width="32dp"
@@ -110,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:paddingHorizontal="24dp"
-                    android:text="Curating calm corners &amp; high-energy escapes. Always seeking the next vibe."
+                    android:text="@string/profile_tagline"
                     android:textAlignment="center"
                     android:textColor="@color/vibe_green"
                     android:textSize="14sp" />
