@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:text="Discover"
+                android:text="@string/nav_discover"
                 android:textColor="@color/vibe_green"
                 android:textSize="22sp"
                 android:textStyle="bold" />
@@ -68,7 +68,6 @@
                     android:id="@+id/moodTitleTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Quiet Focus"
                     android:textColor="@color/vibe_green"
                     android:textSize="28sp"
                     android:textStyle="bold" />
@@ -78,7 +77,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="24 venues found"
                     android:textColor="@color/vibe_green"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -90,7 +88,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Filter"
+                android:contentDescription="@string/filter_description"
                 android:src="@drawable/ic_filter_tune" />
         </RelativeLayout>
 
@@ -104,45 +102,10 @@
             android:scrollbars="none">
 
             <LinearLayout
+                android:id="@+id/subTagsContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_chip_light"
-                    android:paddingHorizontal="14dp"
-                    android:paddingVertical="8dp"
-                    android:text="No loud music"
-                    android:textColor="@color/vibe_green"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:background="@drawable/bg_chip_light"
-                    android:paddingHorizontal="14dp"
-                    android:paddingVertical="8dp"
-                    android:text="Excellent Wi-Fi"
-                    android:textColor="@color/vibe_green"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:background="@drawable/bg_chip_light"
-                    android:paddingHorizontal="14dp"
-                    android:paddingVertical="8dp"
-                    android:text="Comfy Seating"
-                    android:textColor="@color/vibe_green"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                android:orientation="horizontal" />
         </HorizontalScrollView>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -225,7 +188,7 @@
             android:layout_marginBottom="16dp"
             android:elevation="6dp"
             android:paddingHorizontal="24dp"
-            android:text="Map View"
+            android:text="@string/map_view"
             app:icon="@drawable/ic_map_button"
             app:iconGravity="start" />
 
