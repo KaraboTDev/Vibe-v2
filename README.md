@@ -1,10 +1,16 @@
 # Vibe Android App 🌊☕
 
-**Vibe** is a modern, offline-first Android application built in Kotlin (using XML Views with ViewBinding and Material 3) that helps users discover and save spaces matching their current mood and life...
+**Vibe** is a modern, offline-first Android application built in Kotlin (using XML Views with ViewBinding and Material 3) that helps users discover and save spaces matching their current mood and life[...]
 
 ## 📲 Download APK
 
 Get the latest Android build here: [Vibe APK (v1 release)](https://github.com/KaraboTDev/Vibe-v2/releases/tag/v1)
+
+---
+
+## 📄 Project Document
+
+- [Download the Vibe project document (Word)](part3%20document%28VibeApp%29.docx)
 
 ---
 
@@ -59,3 +65,6 @@ Get the latest Android build here: [Vibe APK (v1 release)](https://github.com/Ka
 3. Ensure your `app/google-services.json` file is present in `VibeAndroid/app/`.
 4. Run `./gradlew testDebugUnitTest` to execute all unit tests.
 5. Build and run the debug APK (`VibeAndroid/app/build/outputs/apk/debug/app-debug.apk`).
+
+
+
