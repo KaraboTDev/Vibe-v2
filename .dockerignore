@@ -1,0 +1,10 @@
+.git
+.vs
+.idea
+**/bin
+**/obj
+VibeAndroid
+VibeApi.Tests
+*.user
+*.suo
+*.md

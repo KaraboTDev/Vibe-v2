@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: vibe-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ConnectionStrings__DefaultConnection
+        fromDatabase:
+          name: vibe-db
+          property: connectionString
+      - key: Jwt__Key
+        generateValue: true
+      - key: Jwt__Issuer
+        value: VibeApi
+      - key: Jwt__Audience
+        value: VibeApp
+      - key: Jwt__ExpiresMinutes
+        value: "10080"
+      - key: Geoapify__ApiKey
+        sync: false
+      - key: Admin__Key
+        sync: false
+
+databases:
+  - name: vibe-db
