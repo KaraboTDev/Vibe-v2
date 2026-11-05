@@ -156,6 +156,20 @@
             app:icon="@drawable/ic_arrow_right"
             app:iconGravity="end" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/googleLoginButton"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:minHeight="52dp"
+            android:text="@string/continue_with_google"
+            android:textColor="@color/vibe_green"
+            app:icon="@drawable/ic_google"
+            app:iconGravity="textStart"
+            app:iconTint="@null"
+            app:strokeColor="@color/vibe_green" />
+
         <TextView
             android:id="@+id/goToRegisterTextView"
             android:layout_width="wrap_content"

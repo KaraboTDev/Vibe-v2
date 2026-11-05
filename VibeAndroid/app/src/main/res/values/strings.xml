@@ -11,6 +11,7 @@
     <string name="register_button">Create account</string>
     <string name="go_to_register">New to Vibe? Create an account</string>
     <string name="go_to_login">Already have an account? Log in</string>
+    <string name="continue_with_google">Continue with Google</string>
     <string name="home_title">Home</string>
     <string name="home_signed_in_as">Signed in as %1$s</string>
     <string name="home_placeholder">Mood search is coming next.</string>

@@ -13,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.snackbar.Snackbar
+import com.karabotshivhase.vibe.auth.GoogleSsoHelper
 import com.karabotshivhase.vibe.databinding.ActivityRegisterBinding
 import com.karabotshivhase.vibe.ui.auth.RegisterViewModel
 import com.karabotshivhase.vibe.ui.auth.UiEvent
@@ -31,6 +32,8 @@ class RegisterActivity : AppCompatActivity() {
 
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val app = application as VibeApp
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.rootScrollView) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -64,6 +67,19 @@ class RegisterActivity : AppCompatActivity() {
             viewModel.register(email, password, confirm)
         }
 
+        val googleSsoHelper = GoogleSsoHelper(this)
+        binding.googleLoginButton.setOnClickListener {
+            hideKeyboard()
+            lifecycleScope.launch {
+                val idToken = googleSsoHelper.getGoogleIdToken()
+                if (idToken != null) {
+                    viewModel.registerWithGoogle(idToken, app.authRepository)
+                } else {
+                    Snackbar.make(binding.root, R.string.error_unknown, Snackbar.LENGTH_LONG).show()
+                }
+            }
+        }
+
         binding.goToLoginTextView.setOnClickListener {
             finish()
         }
@@ -78,6 +94,7 @@ class RegisterActivity : AppCompatActivity() {
 
                         binding.progressIndicator.visibility = if (state.isLoading) View.VISIBLE else View.GONE
                         binding.registerButton.isEnabled = !state.isLoading
+                        binding.googleLoginButton.isEnabled = !state.isLoading
                         binding.emailEditText.isEnabled = !state.isLoading
                         binding.passwordEditText.isEnabled = !state.isLoading
                         binding.confirmPasswordEditText.isEnabled = !state.isLoading

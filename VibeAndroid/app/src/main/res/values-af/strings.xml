@@ -10,6 +10,7 @@
     <string name="register_button">Skep rekening</string>
     <string name="go_to_register">Nuut by Vibe? Skep \'n rekening</string>
     <string name="go_to_login">Het jy reeds \'n rekening? Teken in</string>
+    <string name="continue_with_google">Gaan voort met Google</string>
     <string name="home_title">Tuis</string>
     <string name="home_signed_in_as">Aangemeld as %1$s</string>
     <string name="home_placeholder">Bui-soektog kom binnekort.</string>

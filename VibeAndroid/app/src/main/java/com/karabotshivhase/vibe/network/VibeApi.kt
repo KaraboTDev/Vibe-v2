@@ -16,6 +16,9 @@ interface VibeApi {
     @POST("auth/login")
     suspend fun login(@Body request: LoginRequest): Response<AuthResponse>
 
+    @POST("auth/google")
+    suspend fun googleLogin(@Body request: GoogleLoginRequest): Response<AuthResponse>
+
     @GET("tags")
     suspend fun getTags(): Response<List<TagDto>>
 

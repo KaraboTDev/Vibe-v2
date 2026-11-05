@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.karabotshivhase.vibe.R
 import com.karabotshivhase.vibe.auth.AuthActions
+import com.karabotshivhase.vibe.auth.AuthRepository
 import com.karabotshivhase.vibe.auth.AuthResult
 import com.karabotshivhase.vibe.auth.AuthValidator
 import com.karabotshivhase.vibe.auth.FailureKind
@@ -59,6 +60,28 @@ class RegisterViewModel(
         viewModelScope.launch {
             try {
                 when (val result = authActions.register(email, password)) {
+                    is AuthResult.Success -> {
+                        _events.send(UiEvent.NavigateHome)
+                    }
+                    is AuthResult.Failure -> {
+                        _uiState.update {
+                            it.copy(messageRes = mapFailureKind(result.kind))
+                        }
+                    }
+                }
+            } finally {
+                _uiState.update { it.copy(isLoading = false) }
+            }
+        }
+    }
+
+    fun registerWithGoogle(idToken: String, authRepository: AuthRepository) {
+        if (_uiState.value.isLoading) return
+        _uiState.update { it.copy(isLoading = true, messageRes = null) }
+
+        viewModelScope.launch {
+            try {
+                when (val result = authRepository.googleLogin(idToken)) {
                     is AuthResult.Success -> {
                         _events.send(UiEvent.NavigateHome)
                     }

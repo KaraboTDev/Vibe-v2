@@ -13,6 +13,8 @@
     <string name="register_button">Dala i-akhawunti</string>
     <string name="go_to_register">ImiShabashi entsha ku-Vibe? Dala i-akhawunti</string>
     <string name="go_to_login">Usuvele unayo i-akhawunti? Ngena</string>
+    <!-- REVIEW: Google SSO string -->
+    <string name="continue_with_google">Qhubeka ne-Google</string>
     <string name="home_title">Ekhaya</string>
     <string name="home_signed_in_as">Ungenile njenge: %1$s</string>
     <string name="home_placeholder">Ukusesha ngemizwa kuyeza maduze.</string>

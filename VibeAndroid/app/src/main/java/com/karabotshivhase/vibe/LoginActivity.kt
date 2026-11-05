@@ -13,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.snackbar.Snackbar
+import com.karabotshivhase.vibe.auth.GoogleSsoHelper
 import com.karabotshivhase.vibe.databinding.ActivityLoginBinding
 import com.karabotshivhase.vibe.ui.auth.LoginViewModel
 import com.karabotshivhase.vibe.ui.auth.UiEvent
@@ -65,6 +66,19 @@ class LoginActivity : AppCompatActivity() {
             viewModel.login(email, password)
         }
 
+        val googleSsoHelper = GoogleSsoHelper(this)
+        binding.googleLoginButton.setOnClickListener {
+            hideKeyboard()
+            lifecycleScope.launch {
+                val idToken = googleSsoHelper.getGoogleIdToken()
+                if (idToken != null) {
+                    viewModel.loginWithGoogle(idToken, app.authRepository)
+                } else {
+                    Snackbar.make(binding.root, R.string.error_unknown, Snackbar.LENGTH_LONG).show()
+                }
+            }
+        }
+
         binding.goToRegisterTextView.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
@@ -78,6 +92,7 @@ class LoginActivity : AppCompatActivity() {
 
                         binding.progressIndicator.visibility = if (state.isLoading) View.VISIBLE else View.GONE
                         binding.loginButton.isEnabled = !state.isLoading
+                        binding.googleLoginButton.isEnabled = !state.isLoading
                         binding.emailEditText.isEnabled = !state.isLoading
                         binding.passwordEditText.isEnabled = !state.isLoading
 

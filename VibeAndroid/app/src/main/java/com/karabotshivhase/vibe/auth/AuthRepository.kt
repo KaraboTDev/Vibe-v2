@@ -3,6 +3,7 @@ package com.karabotshivhase.vibe.auth
 import com.google.gson.Gson
 import com.karabotshivhase.vibe.network.AuthResponse
 import com.karabotshivhase.vibe.network.ErrorBody
+import com.karabotshivhase.vibe.network.GoogleLoginRequest
 import com.karabotshivhase.vibe.network.LoginRequest
 import com.karabotshivhase.vibe.network.RegisterRequest
 import com.karabotshivhase.vibe.network.VibeApi
@@ -27,6 +28,12 @@ class AuthRepository(
         val processedEmail = email.trim().lowercase()
         return executeAuthCall {
             api.register(RegisterRequest(email = processedEmail, password = password))
+        }
+    }
+
+    suspend fun googleLogin(idToken: String): AuthResult {
+        return executeAuthCall {
+            api.googleLogin(GoogleLoginRequest(idToken))
         }
     }
 
