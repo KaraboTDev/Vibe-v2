@@ -1,5 +1,9 @@
 package com.karabotshivhase.vibe.ui
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -7,6 +11,8 @@ import android.widget.ArrayAdapter
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Lifecycle
@@ -99,6 +105,12 @@ class SettingsActivity : AppCompatActivity() {
             viewModel.setNotifications(nextState)
         }
 
+        // Long-click Notifications Row to trigger an instant test notification for proof screenshots!
+        binding.notificationsRow.setOnLongClickListener {
+            triggerTestNotification()
+            true
+        }
+
         // Logout Button
         binding.logoutButton.setOnClickListener {
             showLogoutDialog()
@@ -178,6 +190,44 @@ class SettingsActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+    }
+
+    private fun triggerTestNotification() {
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val channel = NotificationChannel(
+            "vibe_notifications",
+            getString(R.string.settings_notifications),
+            NotificationManager.IMPORTANCE_DEFAULT,
+        ).apply {
+            description = getString(R.string.settings_notifications_summary)
+        }
+        notificationManager.createNotificationChannel(channel)
+
+        val intent = Intent(this, VenueDetailActivity::class.java).apply {
+            putExtra(Extras.EXTRA_VENUE_ID, 1)
+        }
+        val pendingIntent = PendingIntent.getActivity(
+            this,
+            1001,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+        )
+
+        val notification = NotificationCompat.Builder(this, "vibe_notifications")
+            .setSmallIcon(R.drawable.ic_vibe_logo_small)
+            .setContentTitle("New Quiet Spot Found!")
+            .setContentText("Tap to check out Lumina Roasters nearby.")
+            .setAutoCancel(true)
+            .setContentIntent(pendingIntent)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .build()
+
+        try {
+            notificationManager.notify(1001, notification)
+            Snackbar.make(binding.root, "Test notification triggered!", Snackbar.LENGTH_SHORT).show()
+        } catch (_: SecurityException) {
+            Snackbar.make(binding.root, "Please grant notification permissions in system settings.", Snackbar.LENGTH_LONG).show()
         }
     }
 
