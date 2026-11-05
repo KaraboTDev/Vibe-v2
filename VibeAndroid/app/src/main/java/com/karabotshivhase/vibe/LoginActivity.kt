@@ -70,12 +70,19 @@ class LoginActivity : AppCompatActivity() {
         binding.googleLoginButton.setOnClickListener {
             hideKeyboard()
             lifecycleScope.launch {
-                val idToken = googleSsoHelper.getGoogleIdToken()
-                if (idToken != null) {
-                    viewModel.loginWithGoogle(idToken, app.authRepository)
-                } else {
-                    Snackbar.make(binding.root, R.string.error_unknown, Snackbar.LENGTH_LONG).show()
-                }
+                val ssoResult = googleSsoHelper.getGoogleIdToken()
+                ssoResult.fold(
+                    onSuccess = { idToken ->
+                        viewModel.loginWithGoogle(idToken, app.authRepository)
+                    },
+                    onFailure = { error ->
+                        if (error is androidx.credentials.exceptions.GetCredentialCancellationException) {
+                            return@fold
+                        }
+                        val message = error.localizedMessage ?: getString(R.string.error_unknown)
+                        Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
+                    }
+                )
             }
         }
 
