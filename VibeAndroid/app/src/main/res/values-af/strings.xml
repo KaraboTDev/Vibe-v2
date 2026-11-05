@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_title">Welkom terug</string>
+    <string name="login_subtitle">Vind \'n ruimte wat by jou bui pas</string>
+    <string name="register_title">Skep jou rekening</string>
+    <string name="email_label">E-pos</string>
+    <string name="password_label">Wagwoord</string>
+    <string name="confirm_password_label">Bevestig wagwoord</string>
+    <string name="login_button">Teken in</string>
+    <string name="register_button">Skep rekening</string>
+    <string name="go_to_register">Nuut by Vibe? Skep \'n rekening</string>
+    <string name="go_to_login">Het jy reeds \'n rekening? Teken in</string>
+    <string name="home_title">Tuis</string>
+    <string name="home_signed_in_as">Aangemeld as %1$s</string>
+    <string name="home_placeholder">Bui-soektog kom binnekort.</string>
+    <string name="logout_button">Teken uit</string>
+    <string name="error_email_blank">Voer jou e-pos in</string>
+    <string name="error_email_invalid">Voer \'n geldige e-posadres in</string>
+    <string name="error_password_blank">Voer jou wagwoord in</string>
+    <string name="error_password_short">Gebruik minstens 8 karakters</string>
+    <string name="error_passwords_mismatch">Wagwoorde stem nie ooreen nie</string>
+    <string name="error_invalid_credentials">Verkeerde e-pos of wagwoord</string>
+    <string name="error_email_taken">\'n Rekening met hierdie e-pos bestaan reeds</string>
+    <string name="error_invalid_input">Gaan asseblief jou besonderhede na en probeer weer</string>
+    <string name="error_network">Kan nie die bediener bereik nie. Kontroleer jou verbinding en probeer weer.</string>
+    <string name="error_unknown">Iets het verkeerd geloop. Probeer asseblief weer.</string>
+
+    <!-- Welcome Screen Strings -->
+    <string name="welcome_heading">Vind jou ritme.</string>
+    <string name="welcome_subtitle">Ontdek die perfekte ruimte vir hoe jy nou voel.</string>
+
+    <!-- Mood Picker, Results, and Detail Strings -->
+    <string name="home_heading">Hoe voel jy?</string>
+    <string name="home_subtitle">Kies \'n bui en ons vind ruimtes wat pas</string>
+    <string name="search_area_label">Soekarea</string>
+    <string name="find_spaces_button">Vind ruimtes</string>
+    <string name="moods_load_error">Kon nie buie laai nie. Kontroleer jou verbinding.</string>
+    <string name="try_again">Probeer weer</string>
+    <string name="results_title">Ruimtes: %1$s</string>
+    <string name="results_empty">Geen ruimtes vir %1$s naby %2$s gevind nie. Probeer \'n ander area.</string>
+    <string name="results_error">Kon nie ruimtes laai nie. Kontroleer jou verbinding.</string>
+    <string name="hours_not_listed">Ure nie gelys nie</string>
+    <string name="address_not_listed">Adres nie gelys nie</string>
+    <string name="opening_hours_heading">Oopmaakure</string>
+    <string name="mood_tags_heading">Bui-etikette</string>
+    <string name="open_in_maps">Maak oop in Kaarte</string>
+    <string name="maps_not_available">Geen kaarte-toepassing op hierdie toestel gevind nie</string>
+    <string name="venue_not_found">Hierdie ruimte is nie meer beskikbaar nie</string>
+    <string name="venue_load_error">Kon nie hierdie ruimte laai nie. Kontroleer jou verbinding.</string>
+    <string name="venue_item_description">%1$s, %2$s ver, %3$s</string>
+    <string name="mood_quiet">Stil</string>
+    <string name="mood_social">Sosiaal</string>
+    <string name="mood_focus">Fokus</string>
+    <string name="mood_creative">Kreatief</string>
+    <string name="mood_cheap_wifi">Goedkoop Wi-Fi</string>
+
+    <!-- Saved Spaces Strings -->
+    <string name="nav_saved_spaces">Gestoorde ruimtes</string>
+    <string name="saved_title">Gestoorde ruimtes</string>
+    <string name="saved_subtitle">Offline beskikbaar</string>
+    <string name="saved_empty_title">Nog niks gestoor nie</string>
+    <string name="saved_empty_hint">Stoor \'n ruimte vanaf sy besonderhede en dit sal hier verskyn, selfs sonder \'n verbinding.</string>
+    <string name="save_button">Stoor ruimte</string>
+    <string name="saved_button">Gestoor</string>
+    <string name="saved_message">In jou lys gestoor</string>
+    <string name="removed_message">Uit gestoordes verwyder</string>
+    <string name="pending_sync_chip">Wag vir sinkronisering</string>
+    <string name="remove_saved_description">Verwyder %1$s uit gestoordes</string>
+    <string name="offline_copy_notice">Jy is vanlyn. Wys jou gestoorde kopie.</string>
+
+    <plurals name="pending_changes">
+        <item quantity="one">%d verandering wag om te sinkroniseer</item>
+        <item quantity="other">%d veranderings wag om te sinkroniseer</item>
+    </plurals>
+
+    <plurals name="places_count">
+        <item quantity="one">%d plek</item>
+        <item quantity="other">%d plekke</item>
+    </plurals>
+
+    <!-- Settings Strings -->
+    <string name="settings_title">Instellings</string>
+    <string name="settings_language">Taal</string>
+    <string name="settings_default_area">Verstek soekarea</string>
+    <string name="settings_notifications">Kennisgewings</string>
+    <string name="settings_notifications_summary">Kry opdaterings oor nuwe ruimtes naby jou</string>
+    <string name="settings_account">Rekening</string>
+    <string name="settings_saved">Instellings gestoor</string>
+    <string name="settings_saved_offline">Op hierdie toestel gestoor. Ons sal sinkroniseer wanneer jy aanlyn is.</string>
+    <string name="settings_invalid">Daardie opsie word nie ondersteun nie.</string>
+    <string name="session_expired">Jou sessie het verval. Teken asseblief weer in.</string>
+    <string name="login_action">Teken in</string>
+    <string name="logout_confirm_title">Teken uit by Vibe?</string>
+    <string name="logout_confirm_message">Jy kan enige tyd weer intaken.</string>
+    <string name="cancel">Kanselleer</string>
+    <string name="nav_settings">Instellings</string>
+
+    <!-- Navigation & Bento Grid Strings -->
+    <string name="nav_discover">Ontdek</string>
+    <string name="nav_saved">Gestoor</string>
+    <string name="nav_activity">Aktiwiteit</string>
+    <string name="nav_profile">Profiel</string>
+
+    <string name="home_heading_bento">Wat is die\nbui?</string>
+    <string name="home_subtitle_bento">Vind die perfekte plek vir jou huidige bui.</string>
+
+    <string name="bento_quiet_focus">Stil Fokus</string>
+    <string name="bento_deep_work">Diep werk</string>
+    <string name="bento_social_lively">Sosiaal &amp; Lewendig</string>
+    <string name="bento_good_energy">Goeie energie</string>
+    <string name="bento_fast_wifi">Vinninge Wi-Fi</string>
+    <string name="bento_download_away">Aflaai sonder perke</string>
+    <string name="bento_inspiring_spaces">Inspirerende ruimtes</string>
+    <string name="bento_concentration">Konsentrasie</string>
+    <string name="nearby_favourites_title">Gunstelinge Naby</string>
+    <string name="see_all">Sien alles</string>
+
+    <string name="venues_found_count">%d ruimtes gevind</string>
+    <string name="filter_description">Filtreer</string>
+    <string name="chip_no_loud_music">Geen harde musiek nie</string>
+    <string name="chip_excellent_wifi">Uitstekende Wi-Fi</string>
+    <string name="chip_comfy_seating">Gemaklike sitplekke</string>
+    <string name="map_view">Kaartaansig</string>
+    <string name="searching_spaces">Soek tans ruimtes...</string>
+    <string name="couldnt_load_venues">Kon nie ruimtes laai nie</string>
+
+    <string name="search_description">Soek</string>
+    <string name="search_saved_spaces_hint">Soek gestoorde ruimtes...</string>
+    <string name="pill_all_saved">Alles Gestoor</string>
+    <string name="saved_for_mood">Gestoor vir %1$s</string>
+    <string name="profile_tagline">Samesteller van stil hoekies en hoë-energie ontsnapkoerse. Altyd op soek na die volgende bui.</string>
+    <string name="rating_description">Gradering</string>
+    <string name="distance_description">Afstand</string>
+    <string name="distance_away">%1$s ver</string>
+</resources>

@@ -10,15 +10,17 @@ import com.karabotshivhase.vibe.R
 import com.karabotshivhase.vibe.databinding.ItemVenueBinding
 import com.karabotshivhase.vibe.venue.Venue
 import com.karabotshivhase.vibe.util.DistanceFormatter
+import com.karabotshivhase.vibe.util.VenueImageMapper
 import com.karabotshivhase.vibe.util.moodLabelRes
 
 class VenuesAdapter(
+    private val currentMood: String? = null,
     private val onVenueClick: (Venue) -> Unit,
 ) : ListAdapter<Venue, VenuesAdapter.VenueViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VenueViewHolder {
         val binding = ItemVenueBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return VenueViewHolder(binding, onVenueClick)
+        return VenueViewHolder(binding, currentMood, onVenueClick)
     }
 
     override fun onBindViewHolder(holder: VenueViewHolder, position: Int) {
@@ -27,6 +29,7 @@ class VenuesAdapter(
 
     class VenueViewHolder(
         private val binding: ItemVenueBinding,
+        private val currentMood: String?,
         private val onVenueClick: (Venue) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -35,6 +38,9 @@ class VenuesAdapter(
             binding.nameTextView.text = venue.name
             val distanceStr = DistanceFormatter.format(venue.distanceMeters)
             binding.distanceTextView.text = "$distanceStr away"
+
+            val moodForImage = currentMood ?: venue.tags.firstOrNull()
+            binding.venueImageView.setImageResource(VenueImageMapper.imageForVenue(moodForImage, venue.id))
 
             val tagsStr = if (venue.tags.isNotEmpty()) {
                 venue.tags.joinToString(" · ") { tag ->

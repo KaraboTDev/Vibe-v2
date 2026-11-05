@@ -54,7 +54,7 @@ class ResultsActivity : AppCompatActivity() {
         val displayMood = moodLabelRes(viewModel.mood)?.let { getString(it) } ?: viewModel.mood
         binding.moodTitleTextView.text = displayMood
 
-        adapter = VenuesAdapter { venue ->
+        adapter = VenuesAdapter(viewModel.mood) { venue ->
             val intent = Intent(this, VenueDetailActivity::class.java).apply {
                 putExtra(Extras.EXTRA_VENUE_ID, venue.id)
             }

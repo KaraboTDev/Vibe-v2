@@ -10,6 +10,7 @@ import com.karabotshivhase.vibe.R
 import com.karabotshivhase.vibe.data.favorites.SavedSpace
 import com.karabotshivhase.vibe.databinding.ItemSavedBinding
 import com.karabotshivhase.vibe.util.HoursFormatter
+import com.karabotshivhase.vibe.util.VenueImageMapper
 import com.karabotshivhase.vibe.util.moodLabelRes
 
 class SavedAdapter(
@@ -35,6 +36,9 @@ class SavedAdapter(
         fun bind(space: SavedSpace) {
             val context = binding.root.context
             binding.nameTextView.text = space.name
+
+            val imageRes = VenueImageMapper.imageForVenue(space.tags.firstOrNull(), space.venueId)
+            binding.venueImageView.setImageResource(imageRes)
 
             val tagsStr = if (space.tags.isNotEmpty()) {
                 space.tags.joinToString(" · ") { tag ->

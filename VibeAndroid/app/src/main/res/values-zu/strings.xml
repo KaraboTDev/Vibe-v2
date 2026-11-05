@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- REVIEW: Zulu welcome back phrase -->
+    <string name="login_title">Siyakwamukela emuva</string>
+    <!-- REVIEW: Tone check for mood matching -->
+    <string name="login_subtitle">Thola indawo efanela imizwa yakho</string>
+    <!-- REVIEW: Account creation phrase -->
+    <string name="register_title">Dala i-akhawunti yakho</string>
+    <string name="email_label">I-imeyili</string>
+    <string name="password_label">Iphasiwedi</string>
+    <string name="confirm_password_label">Iqinisekise iphasiwedi</string>
+    <string name="login_button">Ngena</string>
+    <string name="register_button">Dala i-akhawunti</string>
+    <string name="go_to_register">ImiShabashi entsha ku-Vibe? Dala i-akhawunti</string>
+    <string name="go_to_login">Usuvele unayo i-akhawunti? Ngena</string>
+    <string name="home_title">Ekhaya</string>
+    <string name="home_signed_in_as">Ungenile njenge: %1$s</string>
+    <string name="home_placeholder">Ukusesha ngemizwa kuyeza maduze.</string>
+    <string name="logout_button">Phuma</string>
+    <string name="error_email_blank">Faka i-imeyili yakho</string>
+    <string name="error_email_invalid">Faka i-imeyili esebenzayo</string>
+    <string name="error_password_blank">Faka iphasiwedi yakho</string>
+    <string name="error_password_short">Sebenzisa amagama okungenani angu-8</string>
+    <string name="error_passwords_mismatch">Amaphasiwedi awafani</string>
+    <string name="error_invalid_credentials">I-imeyili noma iphasiwedi ayilungile</string>
+    <string name="error_email_taken">I-akhawunti enale imeyili isikhona kakade</string>
+    <string name="error_invalid_input">Sicela uhlole imininingwane yakho uphinde uzame</string>
+    <string name="error_network">Anikwazi ukufinyelela isiphakeli. Hlola uxhumano lwakho uphinde uzame.</string>
+    <string name="error_unknown">Kukhona okungahambanga kahle. Sicela uzame futhi.</string>
+
+    <!-- Welcome Screen Strings -->
+    <!-- REVIEW: Rhythm idiom in Zulu -->
+    <string name="welcome_heading">Thola isigqi sakho.</string>
+    <string name="welcome_subtitle">Thola indawo ekahle yemizwa yakho yamanje.</string>
+
+    <!-- Mood Picker, Results, and Detail Strings -->
+    <string name="home_heading">Uzizwa kanjani?</string>
+    <string name="home_subtitle">Khetha umuzwa sizokutholela izindawo ezikufanele</string>
+    <string name="search_area_label">Indawo yokusesha</string>
+    <string name="find_spaces_button">Thola izindawo</string>
+    <string name="moods_load_error">Akwakwazi ukulayisha imizwa. Hlola uxhumano lwakho.</string>
+    <string name="try_again">Zama futhi</string>
+    <!-- REVIEW: Pattern avoiding grammatical inflection -->
+    <string name="results_title">Izindawo: %1$s</string>
+    <string name="results_empty">Awekho izindawo (%1$s) ezitholakele eduze kwase-%2$s. Zama enye indawo.</string>
+    <string name="results_error">Akwakwazi ukulayisha izindawo. Hlola uxhumano lwakho.</string>
+    <string name="hours_not_listed">Amahora awabaliwe</string>
+    <string name="address_not_listed">IKheli alibaliwe</string>
+    <string name="opening_hours_heading">Amahora okuvula</string>
+    <string name="mood_tags_heading">Amamaki omuzwa</string>
+    <string name="open_in_maps">Vula ku-Amamephu</string>
+    <string name="maps_not_available">Awekho uhlelo lwamamephu olutholakala kulokhu kwedivayisi</string>
+    <string name="venue_not_found">Le ndawo ayisatholakali</string>
+    <string name="venue_load_error">Akwakwazi ukulayisha le ndawo. Hlola uxhumano lwakho.</string>
+    <!-- REVIEW: Placeholder formatting for distance -->
+    <string name="venue_item_description">%1$s, bukhama ngu-%2$s, %3$s</string>
+    <!-- REVIEW: Zulu translations for mood display tags -->
+    <string name="mood_quiet">Ukuthula</string>
+    <string name="mood_social">Ukusondelana</string>
+    <string name="mood_focus">Ukugxila</string>
+    <string name="mood_creative">Ubuciko</string>
+    <string name="mood_cheap_wifi">I-Wi-Fi Yashodaphi</string>
+
+    <!-- Saved Spaces Strings -->
+    <string name="nav_saved_spaces">Izindawo ezilondoloziwe</string>
+    <string name="saved_title">Izindawo ezilondoloziwe</string>
+    <string name="saved_subtitle">Itholakala ngaphandle kwe-inthanethi</string>
+    <string name="saved_empty_title">Akukho okulondoloziwe okwamanje</string>
+    <string name="saved_empty_hint">Londoloza indawo kusuka emininingwaneni yayo izovela lapha, ngisho ngaphandle koxhumano.</string>
+    <string name="save_button">Londoloza indawo</string>
+    <string name="saved_button">Kulondoloziwe</string>
+    <string name="saved_message">Kulondolozwe ohlwini lwakho</string>
+    <string name="removed_message">Kususiwe kulokho okulondoloziwe</string>
+    <string name="pending_sync_chip">Kulindeleke ukuvumelanisa</string>
+    <string name="remove_saved_description">Susa i-%1$s kulokho okulondoloziwe</string>
+    <string name="offline_copy_notice">Awuxhumekile. Kuboniswa ikhophi yakho elondoloziwe.</string>
+
+    <plurals name="pending_changes">
+        <item quantity="one">%d ushintsho lulindele ukuvumelanisa</item>
+        <item quantity="other">%d izinto ezilindele ukuvumelanisa</item>
+    </plurals>
+
+    <plurals name="places_count">
+        <item quantity="one">Indawo e-%d</item>
+        <item quantity="other">Izindawo ezinye izi-%d</item>
+    </plurals>
+
+    <!-- Settings Strings -->
+    <string name="settings_title">Izilungiselelo</string>
+    <string name="settings_language">Ulimi</string>
+    <string name="settings_default_area">Indawo yokusesha eyandulelayo</string>
+    <string name="settings_notifications">Izaziso</string>
+    <string name="settings_notifications_summary">Thola izibuyekezo ngezindawo ezintsha eduze kwakho</string>
+    <string name="settings_account">I-akhawunti</string>
+    <string name="settings_saved">Izilungiselelo zilondoloziwe</string>
+    <string name="settings_saved_offline">Kulondolozwe kulokhu kwedivayisi. Sizovumelanisa uma unxhumeke ku-inthanethi.</string>
+    <string name="settings_invalid">Leyo nketho ayisekelwa.</string>
+    <string name="session_expired">Isikhathi sakho siphelile. Sicela ungene futhi.</string>
+    <string name="login_action">Ngena</string>
+    <string name="logout_confirm_title">Phuma ku-Vibe?</string>
+    <string name="logout_confirm_message">Ungangena futhi nganoma yisiphi isikhathi.</string>
+    <string name="cancel">Khashela</string>
+    <string name="nav_settings">Izilungiselelo</string>
+
+    <!-- Navigation & Bento Grid Strings -->
+    <string name="nav_discover">Thola</string>
+    <string name="nav_saved">Ezilondoloziwe</string>
+    <string name="nav_activity">Isebenzo</string>
+    <string name="nav_profile">Iphrofayili</string>
+
+    <!-- REVIEW: Zulu slang/idiom for vibe query -->
+    <string name="home_heading_bento">Umuwa unjani?</string>
+    <string name="home_subtitle_bento">Thola indawo ekahle yemizwa yakho yamanje.</string>
+
+    <string name="bento_quiet_focus">Ukuthula NeGxa</string>
+    <string name="bento_deep_work">Umsebenzi ojulile</string>
+    <string name="bento_social_lively">Ukusondelana &amp; Imifula</string>
+    <string name="bento_good_energy">Amandla amahle</string>
+    <string name="bento_fast_wifi">I-Wi-Fi Esheshayo</string>
+    <string name="bento_download_away">Dawuniloda ngokukhululeka</string>
+    <string name="bento_inspiring_spaces">Izindawo ezikhuthazayo</string>
+    <string name="bento_concentration">Ukugxila kakhulu</string>
+    <string name="nearby_favourites_title">Ezinye Ezithandwayo Eduze</string>
+    <string name="see_all">Bona konke</string>
+
+    <string name="venues_found_count">Izindawo ezitholakale: %d</string>
+    <string name="filter_description">Cinga</string>
+    <string name="chip_no_loud_music">Awekho umculo ososizayo</string>
+    <string name="chip_excellent_wifi">I-Wi-Fi enhle kakhulu</string>
+    <string name="chip_comfy_seating">Izihlalo ezinethezekile</string>
+    <string name="map_view">Ukubuka KweMephu</string>
+    <string name="searching_spaces">Kuseshwa izindawo...</string>
+    <string name="couldnt_load_venues">Akwakwazi ukulayisha izindawo</string>
+
+    <string name="search_description">Sesha</string>
+    <string name="search_saved_spaces_hint">Sesha izindawo ezilondoloziwe...</string>
+    <string name="pill_all_saved">Konke Okulondoloziwe</string>
+    <string name="saved_for_mood">Kulondolozelwe i-%1$s</string>
+    <!-- REVIEW: Poetic tagline translation -->
+    <string name="profile_tagline">Ukuhlela amakhona anokuthula nendawana ezinezinhlansi. Njalo sifuna umuzwa olandelayo.</string>
+    <string name="rating_description">Isilinganiso</string>
+    <string name="distance_description">Iribanga</string>
+    <string name="distance_away">Ibanga elingange-%1$s</string>
+</resources>

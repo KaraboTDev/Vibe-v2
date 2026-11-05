@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Vibe</string>
+    <string name="app_name" translatable="false">Vibe</string>
     <string name="login_title">Welcome back</string>
     <string name="login_subtitle">Find a space that matches your mood</string>
     <string name="register_title">Create your account</string>
@@ -74,6 +74,11 @@
         <item quantity="other">%d changes waiting to sync</item>
     </plurals>
 
+    <plurals name="places_count">
+        <item quantity="one">%d place</item>
+        <item quantity="other">%d places</item>
+    </plurals>
+
     <!-- Settings Strings -->
     <string name="settings_title">Settings</string>
     <string name="settings_language">Language</string>
@@ -93,4 +98,42 @@
     <string name="language_english" translatable="false">English</string>
     <string name="language_zulu" translatable="false">isiZulu</string>
     <string name="language_afrikaans" translatable="false">Afrikaans</string>
+
+    <!-- Navigation & Bento Grid Strings -->
+    <string name="nav_discover">Discover</string>
+    <string name="nav_saved">Saved</string>
+    <string name="nav_activity">Activity</string>
+    <string name="nav_profile">Profile</string>
+
+    <string name="home_heading_bento">What\'s the\nvibe?</string>
+    <string name="home_subtitle_bento">Find the perfect spot for your current mood.</string>
+
+    <string name="bento_quiet_focus">Quiet Focus</string>
+    <string name="bento_deep_work">Deep work</string>
+    <string name="bento_social_lively">Social &amp; Lively</string>
+    <string name="bento_good_energy">Good energy</string>
+    <string name="bento_fast_wifi">Fast Wi-Fi</string>
+    <string name="bento_download_away">Download away</string>
+    <string name="bento_inspiring_spaces">Inspiring spaces</string>
+    <string name="bento_concentration">Concentration</string>
+    <string name="nearby_favourites_title">Nearby Favourites</string>
+    <string name="see_all">See all</string>
+
+    <string name="venues_found_count">%d venues found</string>
+    <string name="filter_description">Filter</string>
+    <string name="chip_no_loud_music">No loud music</string>
+    <string name="chip_excellent_wifi">Excellent Wi-Fi</string>
+    <string name="chip_comfy_seating">Comfy Seating</string>
+    <string name="map_view">Map View</string>
+    <string name="searching_spaces">Searching spaces...</string>
+    <string name="couldnt_load_venues">Couldn\'t load venues</string>
+
+    <string name="search_description">Search</string>
+    <string name="search_saved_spaces_hint">Search saved spaces...</string>
+    <string name="pill_all_saved">All Saved</string>
+    <string name="saved_for_mood">Saved for %1$s</string>
+    <string name="profile_tagline">Curating calm corners &amp; high-energy escapes. Always seeking the next vibe.</string>
+    <string name="rating_description">Rating</string>
+    <string name="distance_description">Distance</string>
+    <string name="distance_away">%1$s away</string>
 </resources>
