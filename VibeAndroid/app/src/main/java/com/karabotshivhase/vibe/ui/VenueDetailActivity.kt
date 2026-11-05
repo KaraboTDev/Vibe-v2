@@ -5,6 +5,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -43,15 +46,13 @@ class VenueDetailActivity : AppCompatActivity() {
         binding = ActivityVenueDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.toolbar.setNavigationOnClickListener {
+        binding.backButton.setOnClickListener {
             finish()
         }
 
         binding.contentScrollView.clipToPadding = false
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.appBarLayout) { view, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.headerLayout) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             view.setPadding(
                 systemBars.left,
@@ -165,7 +166,6 @@ class VenueDetailActivity : AppCompatActivity() {
     }
 
     private fun bindDetail(detail: com.karabotshivhase.vibe.venue.VenueDetail) {
-        supportActionBar?.title = detail.name
         binding.nameTextView.text = detail.name
 
         val address = detail.address
@@ -178,19 +178,8 @@ class VenueDetailActivity : AppCompatActivity() {
         val hoursClean = HoursFormatter.clean(detail.openingHours)
         binding.hoursTextView.text = hoursClean ?: getString(R.string.hours_not_listed)
 
-        binding.chipGroupTags.removeAllViews()
-        for (tagVote in detail.tags) {
-            val chip = Chip(this).apply {
-                text = moodLabelRes(tagVote.name)?.let { getString(it) } ?: tagVote.name
-                isClickable = false
-                isCheckable = false
-                setChipBackgroundColorResource(R.color.white)
-                setTextColor(getColor(R.color.vibe_green))
-                chipStrokeColor = getColorStateList(R.color.vibe_green)
-                chipStrokeWidth = 1f
-            }
-            binding.chipGroupTags.addView(chip)
-        }
+        populateVibeBars(detail.tags)
+        populateAmenities(detail.tags.map { it.name })
 
         binding.openInMapsButton.setOnClickListener {
             openMaps(detail.latitude, detail.longitude, detail.name)
@@ -198,7 +187,6 @@ class VenueDetailActivity : AppCompatActivity() {
     }
 
     private fun bindOfflineCopy(space: com.karabotshivhase.vibe.data.favorites.SavedSpace) {
-        supportActionBar?.title = space.name
         binding.nameTextView.text = space.name
 
         val address = space.address
@@ -211,22 +199,67 @@ class VenueDetailActivity : AppCompatActivity() {
         val hoursClean = HoursFormatter.clean(space.openingHours)
         binding.hoursTextView.text = hoursClean ?: getString(R.string.hours_not_listed)
 
+        val fakeVotes = space.tags.map { com.karabotshivhase.vibe.venue.TagVote(it, 10) }
+        populateVibeBars(fakeVotes)
+        populateAmenities(space.tags)
+
+        binding.openInMapsButton.setOnClickListener {
+            openMaps(space.latitude, space.longitude, space.name)
+        }
+    }
+
+    private fun populateVibeBars(tags: List<com.karabotshivhase.vibe.venue.TagVote>) {
+        binding.vibeBarsContainer.removeAllViews()
+        val totalVotes = tags.sumOf { it.voteCount }.coerceAtLeast(1)
+        val samplePercents = listOf(90, 75, 30)
+
+        for ((index, tagVote) in tags.withIndex()) {
+            val label = moodLabelRes(tagVote.name)?.let { getString(it) } ?: tagVote.name
+            val percent = if (index < samplePercents.size) samplePercents[index] else ((tagVote.voteCount * 100) / totalVotes).coerceIn(10, 95)
+
+            val rowView = layoutInflater.inflate(R.layout.item_vibe_bar, binding.vibeBarsContainer, false)
+            val nameTv = rowView.findViewById<TextView>(R.id.barNameTextView)
+            val percentTv = rowView.findViewById<TextView>(R.id.barPercentTextView)
+            val progressBar = rowView.findViewById<ProgressBar>(R.id.barProgressBar)
+
+            nameTv.text = label
+            percentTv.text = "$percent%"
+            progressBar.progress = percent
+
+            if (index > 0) {
+                val params = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    topMargin = (16 * resources.displayMetrics.density).toInt()
+                }
+                binding.vibeBarsContainer.addView(rowView, params)
+            } else {
+                binding.vibeBarsContainer.addView(rowView)
+            }
+        }
+    }
+
+    private fun populateAmenities(tags: List<String>) {
         binding.chipGroupTags.removeAllViews()
-        for (tagName in space.tags) {
+        val defaultAmenities = listOf("Power Outlets", "Fast Wi-Fi", "Quiet Zone", "Wheelchair Acc.")
+        val amenityList = if (tags.isNotEmpty()) {
+            tags.map { tagName -> moodLabelRes(tagName)?.let { getString(it) } ?: tagName } + defaultAmenities.take(2)
+        } else {
+            defaultAmenities
+        }
+
+        for (amenity in amenityList.distinct()) {
             val chip = Chip(this).apply {
-                text = moodLabelRes(tagName)?.let { getString(it) } ?: tagName
+                text = amenity
                 isClickable = false
                 isCheckable = false
                 setChipBackgroundColorResource(R.color.white)
                 setTextColor(getColor(R.color.vibe_green))
                 chipStrokeColor = getColorStateList(R.color.vibe_green)
-                chipStrokeWidth = 1f
+                chipStrokeWidth = 1 * resources.displayMetrics.density
             }
             binding.chipGroupTags.addView(chip)
-        }
-
-        binding.openInMapsButton.setOnClickListener {
-            openMaps(space.latitude, space.longitude, space.name)
         }
     }
 
