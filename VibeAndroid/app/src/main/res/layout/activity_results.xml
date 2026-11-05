@@ -28,7 +28,15 @@
                 android:layout_height="40dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_vibe_logo_small" />
+                android:src="@drawable/ic_arrow_back"
+                app:tint="@color/vibe_green" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="8dp"
+                android:contentDescription="@string/app_name"
+                android:src="@mipmap/ic_launcher_foreground" />
 
             <TextView
                 android:layout_width="0dp"
@@ -200,8 +208,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:itemIconTint="@color/vibe_green"
-        app:itemTextColor="@color/vibe_green"
+        app:elevation="8dp"
+        app:itemIconTint="@color/bottom_nav_color_state"
+        app:itemTextColor="@color/bottom_nav_color_state"
         app:menu="@menu/menu_bottom_nav" />
 
 </LinearLayout>

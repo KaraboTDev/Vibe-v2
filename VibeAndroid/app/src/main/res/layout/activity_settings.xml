@@ -306,8 +306,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:itemIconTint="@color/vibe_green"
-        app:itemTextColor="@color/vibe_green"
+        app:elevation="8dp"
+        app:itemIconTint="@color/bottom_nav_color_state"
+        app:itemTextColor="@color/bottom_nav_color_state"
         app:menu="@menu/menu_bottom_nav" />
 
 </LinearLayout>

@@ -8,6 +8,9 @@
         <item name="colorSurface">@color/vibe_cream</item>
         <item name="colorError">@color/vibe_error</item>
 
+        <item name="fontFamily">@font/inter</item>
+        <item name="android:fontFamily">@font/inter</item>
+
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">true</item>
 
