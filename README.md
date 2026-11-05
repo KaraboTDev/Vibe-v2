@@ -1,70 +1,65 @@
-# Vibe Android App 🌊☕
+<div align="center">
 
-**Vibe** is a modern, offline-first Android application built in Kotlin (using XML Views with ViewBinding and Material 3) that helps users discover and save spaces matching their current mood and life[...]
+# Vibe Android App
 
-## 📲 Download APK
+**Discover spaces that match your mood. Save favorites and keep them available offline.**
 
-Get the latest Android build here: [Vibe APK (v1 release)](https://github.com/KaraboTDev/Vibe-v2/releases/tag/v1)
+[![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
+[![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/)
+[![Material Design 3](https://img.shields.io/badge/Material_Design_3-6750A4?style=for-the-badge&logo=materialdesign&logoColor=white)](https://m3.material.io/)
 
----
+[![Download APK](https://img.shields.io/badge/Download-Android_APK-2E7D32?style=for-the-badge&logo=android&logoColor=white)](https://github.com/KaraboTDev/Vibe-v2/releases/tag/v1)
+[![Watch demo](https://img.shields.io/badge/Watch-Video_Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtube.com/shorts/XG5egFVZpa0?si=Bgoh0r0eQhwv6-VD)
 
-## 📄 Project Document
-
-- [Download the Vibe project document (Word)](part3%20document%28VibeApp%29.docx)
-
----
-
-## ✨ Key Features
-
-1. **Bento Grid Dashboard & Mood Search**
-   - Immersive home dashboard with mood cards (Quiet Focus, Social & Lively, Fast Wi-Fi, Creative, Focus).
-   - Filter venues by mood, distance, opening hours, and amenities.
-   - Dynamic sub-tag filter chips tailored to each selected mood.
-
-2. **Offline-First Favorites Sync**
-   - Full offline caching powered by **Room Database** and **WorkManager**.
-   - Automatic background synchronization (Push & Pull) with the backend REST API (`https://vibe-api-iu1z.onrender.com/`).
-   - Sync-pending status indicators (*"Waiting to sync"*) and offline copy fallback in venue details.
-
-3. **Google Single Sign-On (SSO)**
-   - Secure authentication via Android **Credential Manager API** and Firebase Auth.
-   - One-tap *"Continue with Google"* login and registration flow.
-
-4. **Push Notifications (FCM)**
-   - **Firebase Cloud Messaging (FCM)** integration supporting rich push notifications and deep-linking directly to venue details.
-   - Runtime permission handling for Android 13+ (`POST_NOTIFICATIONS`) and user notification toggles.
-
-5. **Multi-Language Localisation (`zu` & `af`)**
-   - Full support for English (`en`), isiZulu (`zu`), and Afrikaans (`af`) via Android App Locales (`AppLocale`).
-   - Comprehensive translation test suites verifying placeholder parity and plural definitions.
-
-6. **Material 3 Design & Custom Typography**
-   - Built with Material 3 components, rounded corner cards, gradient overlays, rating pills, and global **Inter** typography.
+</div>
 
 ---
 
-## 🛠 Tech Stack & Architecture
+## About
+
+Vibe is an offline-first Android app built with Kotlin. It helps users discover and save venues based on their mood, preferences, and practical needs.
+
+## Features
+
+| Feature | What it offers |
+| --- | --- |
+| Mood-based discovery | Browse by moods such as Quiet Focus, Social & Lively, Fast Wi-Fi, Creative, and Focus. Filter by distance, opening hours, amenities, and mood-specific tags. |
+| Offline favorites | Room caches favorites locally. WorkManager synchronizes changes with the REST API when connectivity is available, with pending-sync status and offline venue details. |
+| Google sign-in | One-tap sign-in and registration using Android Credential Manager and Firebase Authentication. |
+| Push notifications | Firebase Cloud Messaging notifications can deep-link to venue details. Includes Android 13+ notification permission handling and notification preferences. |
+| Localized interface | English, isiZulu (`zu`), and Afrikaans (`af`) support through Android App Locales, with translation tests. |
+| Material 3 interface | XML layouts, ViewBinding, rounded cards, gradient overlays, rating pills, and Inter typography. |
+
+## Project document
+
+[Download the Vibe project document (Word)](part3%20document%28VibeApp%29.docx)
+
+## Technology
 
 - **Language:** Kotlin
-- **UI:** XML Layouts, ViewBinding, Material 3, RecyclerView (`ListAdapter`), ConstraintLayout
-- **Architecture:** MVVM (Model-View-ViewModel), StateFlow, Coroutines, Repository pattern
-- **Local Storage:** Room Database (`vibe.db`)
-- **Background Jobs:** WorkManager (`SyncWorker`)
-- **Networking:** Retrofit, OkHttp, Gson, MockWebServer
-- **Authentication & SSO:** Firebase Auth, Android Credential Manager (`GetGoogleIdOption`)
-- **Notifications:** Firebase Cloud Messaging (FCM), NotificationCompat
-- **Testing:** JUnit 4, Kotlinx Coroutines Test, MockWebServer (145+ unit tests passing)
+- **UI:** XML, ViewBinding, Material 3, RecyclerView, ConstraintLayout
+- **Architecture:** MVVM, StateFlow, Coroutines, Repository pattern
+- **Local persistence:** Room (`vibe.db`)
+- **Background synchronization:** WorkManager (`SyncWorker`)
+- **Networking:** Retrofit, OkHttp, Gson
+- **Authentication:** Firebase Auth and Android Credential Manager
+- **Notifications:** Firebase Cloud Messaging and NotificationCompat
+- **Testing:** JUnit 4, Kotlinx Coroutines Test, MockWebServer; 145+ unit tests
 
----Youtube link: https://youtube.com/shorts/XG5egFVZpa0?si=Bgoh0r0eQhwv6-VD
+## Getting started
 
+1. Clone this repository and open the `VibeAndroid` project in Android Studio.
+2. Add your Firebase configuration file at `VibeAndroid/app/google-services.json`.
+3. From the `VibeAndroid` directory, run the unit tests:
 
-## 🚀 Getting Started
+   ```bash
+   ./gradlew testDebugUnitTest
+   ```
 
-1. Clone the repository.
-2. Open the `VibeAndroid` project in **Android Studio**.
-3. Ensure your `app/google-services.json` file is present in `VibeAndroid/app/`.
-4. Run `./gradlew testDebugUnitTest` to execute all unit tests.
-5. Build and run the debug APK (`VibeAndroid/app/build/outputs/apk/debug/app-debug.apk`).
+4. Build and run the debug app from Android Studio, or use Gradle to build the debug APK.
 
+The debug APK is generated at `VibeAndroid/app/build/outputs/apk/debug/app-debug.apk`.
 
+## Backend
 
+The app connects to the Vibe REST API at [vibe-api-iu1z.onrender.com](https://vibe-api-iu1z.onrender.com/).
